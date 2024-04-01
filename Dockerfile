@@ -6,6 +6,7 @@ COPY . .
 RUN npm run build
 
 FROM gcr.io/distroless/nodejs
+ENV NODE_ENV=PRODUCTION
 WORKDIR /app
 COPY --from=builder /app/dist ./src
 COPY package*.json ./

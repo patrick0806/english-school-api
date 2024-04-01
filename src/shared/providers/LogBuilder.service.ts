@@ -21,6 +21,8 @@ export class LogBuilderService {
       duration: req.duration,
       durationUnit: req.durationUnit,
     };
+    if (process.env.NODE_ENV === 'PRODUCTION') this.sendToBetterStack(log);
+
     switch (log.level) {
       case LOG_LEVEL_VALUES.INFO:
         return this.logger.log(JSON.stringify(log, null, 2));
@@ -29,6 +31,19 @@ export class LogBuilderService {
       default:
         return this.logger.error(JSON.stringify(log, null, 2));
     }
+  }
+
+  private sendToBetterStack(log) {
+    fetch(`https://in.logs.betterstack.com`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: process.env.BETTER_STACK_TOKEN,
+      },
+      body: JSON.stringify(log),
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   static getInstance() {
