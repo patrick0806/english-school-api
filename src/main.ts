@@ -1,12 +1,19 @@
 import 'dotenv/config';
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { SwaggerConfig } from '@config/swagger';
-import { API_BASE_PATH } from '@shared/constants/apiBasePath';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+
+import { SwaggerConfig } from '@config/swagger';
+
+import { API_BASE_PATH } from '@shared/constants/apiBasePath';
 import { ValidationException } from '@shared/exceptions/validationException';
 import { ExceptionsFilter } from '@shared/filters/ExceptionFilter';
 import { UnexpectedExceptionFilter } from '@shared/filters/UnexpectedExceptionFilter';
+import {
+  BuildResponseInterceptor,
+  DurationRequestInterceptor,
+} from '@shared/interceptors';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,6 +32,10 @@ async function bootstrap() {
   );
 
   app.useGlobalFilters(new UnexpectedExceptionFilter(), new ExceptionsFilter());
+  app.useGlobalInterceptors(
+    new DurationRequestInterceptor(),
+    new BuildResponseInterceptor(),
+  );
   app.setGlobalPrefix(API_BASE_PATH);
   app.enableCors();
   app.enableVersioning({

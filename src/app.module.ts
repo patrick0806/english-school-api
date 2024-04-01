@@ -1,7 +1,9 @@
-import { AuthModule } from '@modules/auth/auth.module';
 import { Module } from '@nestjs/common';
 import { APP_GUARD, RouterModule } from '@nestjs/core';
+
 import { AuthGuard } from '@shared/guards/auth.guard';
+
+import { AuthModule } from '@modules/auth/auth.module';
 
 @Module({
   imports: [
