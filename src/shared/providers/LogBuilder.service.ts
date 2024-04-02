@@ -18,9 +18,10 @@ export class LogBuilderService {
       levelName: params.levelName || LOG_LEVEL_NAMES.INFO,
       message: params.message,
       operation: req.operation,
-      duration: req.duration,
+      duration: Date.now() - req.duration,
       durationUnit: req.durationUnit,
     };
+    delete log.data;
     if (process.env.NODE_ENV === 'PRODUCTION') this.sendToBetterStack(log);
 
     switch (log.level) {

@@ -8,4 +8,5 @@ export interface ILogParams {
   httpReqURL?: string;
   error?: string;
   errorResposne?: string;
+  data?: Record<string, any>;
 }

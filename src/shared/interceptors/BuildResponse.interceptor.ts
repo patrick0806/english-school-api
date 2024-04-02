@@ -23,6 +23,7 @@ export class BuildResponseInterceptor implements NestInterceptor {
         } catch (error) {
           //do nothing on fail log
         }
+
         return params.data || params;
       }),
     );
