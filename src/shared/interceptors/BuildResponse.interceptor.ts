@@ -24,7 +24,7 @@ export class BuildResponseInterceptor implements NestInterceptor {
           //do nothing on fail log
         }
 
-        return params.data || params;
+        return params?.data || params;
       }),
     );
   }

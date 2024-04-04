@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
-
-import { database } from '@config/database';
+import * as Firebase from 'firebase-admin';
 
 @Injectable()
 export class UserRepository {
-  private users = database.collection('users');
+  private firestore: Firebase.firestore.Firestore;
 
-  async save(user: { name: string; email: string }) {
-    return this.users.insertOne(user);
+  constructor() {
+    this.firestore = Firebase.firestore();
   }
 
-  async findByEmail(email: string) {
-    return this.users.findOne({ email });
+  async save(user: any) {
+    //TODO - remove any
+    return this.firestore.collection('users').doc(user.uid).set(user);
   }
 }

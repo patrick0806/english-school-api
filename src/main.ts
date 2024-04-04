@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
+import { initializeFirebase } from '@config/firebase';
 import { SwaggerConfig } from '@config/swagger';
 
 import { API_BASE_PATH } from '@shared/constants/apiBasePath';
@@ -14,6 +15,8 @@ import {
 } from '@shared/interceptors';
 
 import { AppModule } from './app.module';
+
+initializeFirebase();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
