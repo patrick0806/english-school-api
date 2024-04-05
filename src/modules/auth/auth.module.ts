@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserRepository } from '@shared/repositories/user.repository';
 
 import { SignInController } from './contexts/signIn/signIn.controller';
+import { SignInService } from './contexts/signIn/signIn.service';
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import { SignInController } from './contexts/signIn/signIn.controller';
     }),
   ],
   controllers: [SignInController],
-  providers: [UserRepository],
+  providers: [SignInService, UserRepository],
 })
 export class AuthModule {}

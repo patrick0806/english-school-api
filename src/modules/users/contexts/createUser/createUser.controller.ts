@@ -2,7 +2,6 @@ import { Body, Controller, Post, Req } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { API_TAGS } from '@shared/constants/apiTags';
-import { Public } from '@shared/decorators/public.decorator';
 import { ExceptionDTO } from '@shared/filters/exception.dto';
 import { ILogParams, IRequest } from '@shared/interfaces';
 
@@ -15,7 +14,6 @@ export class CreateUserController {
   constructor(private createUserService: CreateUserService) {}
 
   @Post()
-  @Public()
   @ApiBearerAuth('accessToken')
   @ApiResponse({
     status: 201,
