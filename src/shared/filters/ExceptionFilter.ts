@@ -13,7 +13,7 @@ import { LogBuilderService } from '@shared/providers';
 
 import { ExceptionDTO } from './exception.dto';
 
-@Catch(HttpException)
+@Catch()
 export class ExceptionsFilter implements ExceptionFilter {
   private logBuilder = LogBuilderService.getInstance();
 
@@ -28,7 +28,7 @@ export class ExceptionsFilter implements ExceptionFilter {
     const statusCode =
       Number(exception.getStatus()) || HttpStatus.INTERNAL_SERVER_ERROR;
     const exceptionResponse = exception?.getResponse() as Record<string, any>;
-
+    console.log(exception);
     this.logBuilder.build(
       {
         operation: request.operation,

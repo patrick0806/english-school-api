@@ -1,37 +1,49 @@
-import { Injectable } from '@nestjs/common';
-import * as firebase from 'firebase-admin';
+import { HttpStatus, Injectable } from '@nestjs/common';
 
 import { MailerSenderConnector } from '@shared/connectors';
+import { User } from '@shared/entities';
+import { FirebaseAuthException } from '@shared/exceptions/FirebaseAuthException';
+import { FirebaseAuthService } from '@shared/providers/firebaseAtuh.service';
 import { UserRepository } from '@shared/repositories/user.repository';
+import { WelcomeTemplate } from '@shared/templates';
+
+import { CreateUserRequestDTO } from './dtos/request.dto';
+import { CreateUserResponseDTO } from './dtos/response.dto';
 
 @Injectable()
 export class CreateUserService {
   constructor(
     private mailerSender: MailerSenderConnector,
+    private firebaseAuth: FirebaseAuthService,
     private userRepository: UserRepository,
   ) {}
-  async execute() {
-    try {
-      const authUser = await firebase.auth().createUser({
-        email: 'jhondoe@me.com',
-        password: '123456',
-      });
-      const user = {
-        uid: authUser.uid,
-        name: 'Jhon Doe',
-        email: 'jhondoe@me.com',
-        createdAt: new Date(),
-      };
-      await this.userRepository.save(user);
+  async execute(userDTO: CreateUserRequestDTO): Promise<CreateUserResponseDTO> {
+    const userId = await this.firebaseAuth.createUser(userDTO.email);
 
-      await this.mailerSender.sendEmail(
-        user.email,
-        user.name,
-        'Welcome',
-        'Hello',
-      ); //TODO change mensage
-    } catch (err) {
-      console.log(err);
+    const user: User = {
+      ...userDTO,
+      id: userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    try {
+      await this.userRepository.save(user);
+    } catch (error) {
+      await this.firebaseAuth.deleteUser(userId);
+      throw new FirebaseAuthException(
+        HttpStatus.BAD_REQUEST,
+        error.errorInfo.message,
+      );
     }
+
+    await this.mailerSender.sendEmail(
+      user.email,
+      user.name,
+      `Welcome ${user.name}`,
+      WelcomeTemplate({ schoolName: user.school, name: user.name }),
+    );
+
+    return user;
   }
 }

@@ -8,7 +8,6 @@ import { SwaggerConfig } from '@config/swagger';
 import { API_BASE_PATH } from '@shared/constants/apiBasePath';
 import { ValidationException } from '@shared/exceptions/validationException';
 import { ExceptionsFilter } from '@shared/filters/ExceptionFilter';
-import { UnexpectedExceptionFilter } from '@shared/filters/UnexpectedExceptionFilter';
 import {
   BuildResponseInterceptor,
   DurationRequestInterceptor,
@@ -34,7 +33,7 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalFilters(new UnexpectedExceptionFilter(), new ExceptionsFilter());
+  app.useGlobalFilters(new ExceptionsFilter());
   app.useGlobalInterceptors(
     new DurationRequestInterceptor(),
     new BuildResponseInterceptor(),
