@@ -5,6 +5,5 @@ export function getHeader(headers: IncomingHttpHeaders, keyName: string) {
     return null;
   }
 
-  const header = (headers[keyName] as string).split(' ');
-  return header[1];
+  return headers[keyName] as string;
 }

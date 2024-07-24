@@ -1,0 +1,8 @@
+{
+  "VALIDATION_ERROR": "Erro de validação",
+  "NOT_EMPTY": "{property} não pode ser vazio",
+  "INVALID_EMAIL": "email invalido",
+  "INVALID_BOOLEAN": "{property} não é um booleano",
+  "MIN": "{property} with value: \"{value}\" precisa ser no mínimo {constraints.0}",
+  "MAX": "{property} with value: \"{value}\" precisa ser menor ou igual a {constraints.0}"
+}

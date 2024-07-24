@@ -10,10 +10,6 @@ import { SwaggerConfig } from '@config/swagger/swagger.config';
 
 import { API_BASE_PATH } from '@shared/constants';
 import { ValidationException } from '@shared/exceptions';
-import {
-  HttpExceptionFilter,
-  ValidationExceptionFilter,
-} from '@shared/filters';
 import { BuildResponseInterceptor } from '@shared/interceptors';
 
 import { AppModule } from './app.module';
@@ -40,10 +36,6 @@ async function bootstrap() {
   );
 
   app.useGlobalInterceptors(new BuildResponseInterceptor());
-  app.useGlobalFilters(
-    new HttpExceptionFilter(),
-    new ValidationExceptionFilter(),
-  );
 
   app.enableCors({
     origin: process.env.NODE_ENV === 'production' ? 'https://referer.com' : '*',
