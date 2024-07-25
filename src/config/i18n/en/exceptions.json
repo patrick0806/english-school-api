@@ -1,0 +1,8 @@
+{
+  "error": {
+    "CONFLICT_ENTITY": "Entity conflict"
+  },
+  "message": {
+    "CONFLICT_ENTITY": "Entity already exists"
+  }
+}

@@ -14,6 +14,7 @@ import {
 
 import { SchoolMemberRole } from '@shared/enums';
 
+import { Course } from './course.entity';
 import { Group } from './group.entity';
 import { School } from './school.entity';
 import { SchoolMemberContract } from './schoolMemberContract.entity';
@@ -60,13 +61,13 @@ export class SchoolMember {
   )
   contracts: Relation<SchoolMemberContract[]>;
 
-  @ManyToMany(() => SchoolMember, (SchoolMember) => SchoolMember.courses)
+  @ManyToMany(() => Course, (course) => course.schoolMembers)
   @JoinTable({
     name: 'school_members_courses',
     joinColumn: { name: 'school_members_id' },
     inverseJoinColumn: { name: 'course_id' },
   })
-  courses: Relation<SchoolMember[]>;
+  courses: Relation<Course[]>;
 
   @ManyToOne(() => Group, (group) => group.schoolMembers)
   @JoinTable({
@@ -76,9 +77,9 @@ export class SchoolMember {
   })
   groups: Relation<Group[]>;
 
-  @CreateDateColumn({ type: 'datetime', name: 'created_at' })
+  @CreateDateColumn({ type: 'time with time zone', name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime', name: 'updated_at' })
+  @UpdateDateColumn({ type: 'time with time zone', name: 'updated_at' })
   updatedAt: Date;
 }

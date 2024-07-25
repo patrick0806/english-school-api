@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  Relation,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -17,10 +18,6 @@ import { SchoolMember } from './schoolMember.entity';
 export class SchoolMemberContract {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @ManyToOne(() => SchoolMember, (schoolMember) => schoolMember.contracts)
-  @JoinColumn({ name: 'school_member_id' })
-  schoolMember: SchoolMember;
 
   @Column({ type: 'int', nullable: false })
   monthlyValue: number;
@@ -36,11 +33,15 @@ export class SchoolMemberContract {
 
   @ManyToOne(() => Course, (course) => course.contracts)
   @JoinColumn({ name: 'course_id' })
-  course: Course;
+  course: Relation<Course>;
 
-  @CreateDateColumn({ type: 'datetime', name: 'created_at' })
+  @ManyToOne(() => SchoolMember, (schoolMember) => schoolMember.contracts)
+  @JoinColumn({ name: 'school_member_id' })
+  schoolMember: Relation<SchoolMember>;
+
+  @CreateDateColumn({ type: 'time with time zone', name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime', name: 'updated_at' })
+  @UpdateDateColumn({ type: 'time with time zone', name: 'updated_at' })
   updatedAt: Date;
 }

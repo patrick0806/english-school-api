@@ -7,14 +7,15 @@ import { join } from 'node:path';
 
 import typeorm from '@config/database/typeorm';
 
-import { JWTAuthGuard } from '@shared/guards';
-
-import { AuthModule } from '@modules/auth/auth.module';
-import { HealthModule } from '@modules/health/health.module';
 import {
   HttpExceptionFilter,
   ValidationExceptionFilter,
 } from '@shared/filters';
+import { JWTAuthGuard } from '@shared/guards';
+
+import { AuthModule } from '@modules/auth/auth.module';
+import { HealthModule } from '@modules/health/health.module';
+import { SchoolsModule } from '@modules/schools/schools.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import {
     }),
     HealthModule,
     AuthModule,
+    SchoolsModule,
     RouterModule.register([
       {
         path: 'health',
@@ -45,6 +47,10 @@ import {
       {
         path: 'auth',
         module: AuthModule,
+      },
+      {
+        path: 'schools',
+        module: SchoolsModule,
       },
     ]),
   ],

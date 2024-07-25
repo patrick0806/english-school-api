@@ -7,7 +7,7 @@ export class BaseSchema1721851481652 implements MigrationInterface {
         CREATE TABLE "schools" (
           "id" SERIAL PRIMARY KEY,
           "name" VARCHAR(70) UNIQUE NOT NULL,
-          "is_activate" BOOLEAN DEFAULT TRUE NOT NULL,
+          "is_active" BOOLEAN DEFAULT TRUE NOT NULL,
           "created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
           "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
         );

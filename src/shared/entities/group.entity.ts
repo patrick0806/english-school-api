@@ -34,12 +34,6 @@ export class Group {
   @Column({ name: 'is_active', default: true })
   isActive: boolean;
 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
-
   @ManyToMany(() => SchoolMember, (schoolMember) => schoolMember.groups)
   @JoinTable({
     name: 'school_members_groups',
@@ -47,4 +41,10 @@ export class Group {
     inverseJoinColumn: { name: 'user_id' },
   })
   schoolMembers: Relation<SchoolMember[]>;
+
+  @CreateDateColumn({ type: 'time with time zone', name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'time with time zone', name: 'updated_at' })
+  updatedAt: Date;
 }

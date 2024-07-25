@@ -1,0 +1,8 @@
+{
+  "error": {
+    "CONFLICT_ENTITY": "Conflito de entidade"
+  },
+  "message": {
+    "CONFLICT_ENTITY": "Entidade já existe"
+  }
+}

@@ -26,10 +26,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const statusCode =
       Number(exception.getStatus()) || HttpStatus.INTERNAL_SERVER_ERROR;
     const transactionId = getHeader(request.headers, HEADERS.TRANSACTION_ID);
+    const customExceptionData = exception.getResponse() as {
+      error: string;
+      message: string;
+    };
 
     const exceptionResponse = new ExceptionDTO(
       statusCode,
-      exception.error,
+      customExceptionData.error,
       request.url,
       transactionId,
       exception.message,

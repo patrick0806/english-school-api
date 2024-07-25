@@ -21,7 +21,7 @@ export class School {
   name: string;
 
   @Column({ name: 'is_active', nullable: false, default: true })
-  isActivate: boolean;
+  isActive: boolean;
 
   @OneToMany(() => SchoolMember, (SchoolMember) => SchoolMember.school)
   SchoolMembers: Relation<SchoolMember[]>;
@@ -32,9 +32,9 @@ export class School {
   @OneToMany(() => Group, (group) => group.school)
   groups: Relation<Group[]>;
 
-  @CreateDateColumn({ type: 'datetime', name: 'created_at' })
+  @CreateDateColumn({ type: 'time with time zone', name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime', name: 'updated_at' })
+  @UpdateDateColumn({ type: 'time with time zone', name: 'updated_at' })
   updatedAt: Date;
 }

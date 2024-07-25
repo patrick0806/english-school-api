@@ -28,7 +28,7 @@ export class ValidationExceptionFilter implements ExceptionFilter {
 
     const fields = exception.fields.map((field) => {
       return {
-        name: field.name,
+        filed: field.name,
         reason: this.i18n.translate(field.reason, { lang: locale }),
       };
     });

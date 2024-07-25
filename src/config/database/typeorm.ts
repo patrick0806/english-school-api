@@ -12,7 +12,7 @@ const config: any = {
   password: `${process.env.DATABASE_PASSWORD}`,
   database: `${process.env.DATABASE_NAME}`,
   ssl: true,
-  //entities: ['dist/shared/entities/*.entity{.ts,.js}'],
+  entities: ['dist/shared/entities/*.entity{.ts,.js}'],
   migrations: ['dist/config/database/migrations/*{.ts,.js}'],
   synchronize: false,
   logging: process.env.NODE_ENV === 'DEVELOPMENT' ? true : false,

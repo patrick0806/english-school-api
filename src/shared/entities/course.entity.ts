@@ -12,6 +12,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { Group } from './group.entity';
 import { School } from './school.entity';
 import { SchoolMember } from './schoolMember.entity';
 import { SchoolMemberContract } from './schoolMemberContract.entity';
@@ -27,10 +28,6 @@ export class Course {
   @Column({ type: 'varchar', length: 50, nullable: true })
   description: string;
 
-  @ManyToOne(() => School, (school) => school.courses)
-  @JoinColumn({ name: 'school_id' })
-  school: Relation<School>;
-
   @Column({
     name: 'is_active',
     type: 'boolean',
@@ -38,6 +35,9 @@ export class Course {
     nullable: false,
   })
   isActive: boolean;
+
+  @OneToMany(() => Group, (group) => group.course)
+  groups: Relation<Group[]>;
 
   @OneToMany(
     () => SchoolMemberContract,
@@ -53,9 +53,13 @@ export class Course {
   })
   schoolMembers: Relation<SchoolMember[]>;
 
-  @CreateDateColumn({ type: 'datetime', name: 'created_at' })
+  @ManyToOne(() => School, (school) => school.courses)
+  @JoinColumn({ name: 'school_id' })
+  school: Relation<School>;
+
+  @CreateDateColumn({ type: 'time with time zone', name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime', name: 'updated_at' })
+  @UpdateDateColumn({ type: 'time with time zone', name: 'updated_at' })
   updatedAt: Date;
 }

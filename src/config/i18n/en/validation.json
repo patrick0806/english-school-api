@@ -1,10 +1,10 @@
 {
   "VALIDATION_ERROR": "Validation error",
-  "NOT_EMPTY": "{property} cannot be empty",
+  "NOT_EMPTY": "cannot be empty",
   "INVALID_EMAIL": "email is invalid",
-  "INVALID_BOOLEAN": "{property} is not a boolean",
-  "INVALID_NUMBER": "{property} is not a number",
-  "INVALID_STRING": "{property} is not a string",
-  "MIN": "{property} with value: \"{value}\" needs to be at least {constraints.0}, ow and {message}",
-  "MAX": "{property} with value: \"{value}\" needs to be less than {constraints.0}, ow and {message}"
+  "INVALID_BOOLEAN": "is not a boolean",
+  "INVALID_NUMBER": "is not a number",
+  "INVALID_STRING": "is not a string",
+  "MIN": "with value: \"{value}\" needs to be at least {constraints.0}, ow and {message}",
+  "MAX": "with value: \"{value}\" needs to be less than {constraints.0}, ow and {message}"
 }
