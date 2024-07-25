@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { I18nContext, I18nService } from 'nestjs-i18n';
 
+import { SchoolDTO } from '@shared/dtos';
 import { School } from '@shared/entities';
 import { SchoolRepository } from '@shared/repositories';
 
@@ -36,6 +37,10 @@ export class CreateSchoolService {
       });
     }
 
-    return this.schoolRepository.save(plainToClass(School, schoolData));
+    const savedSchoold = await this.schoolRepository.save(
+      plainToClass(School, schoolData),
+    );
+
+    return plainToClass(SchoolDTO, savedSchoold);
   }
 }
