@@ -1,8 +1,10 @@
 {
   "error": {
-    "CONFLICT_ENTITY": "Entity conflict"
+    "CONFLICT_ENTITY": "Entity conflict",
+    "NOT_FOUND_ENTITY": "Entity not found"
   },
   "message": {
-    "CONFLICT_ENTITY": "Entity already exists"
+    "CONFLICT_ENTITY": "Entity already exists",
+    "NOT_FOUND_ENTITY": "{entityName} with value {propertyValue} not found"
   }
 }

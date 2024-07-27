@@ -18,4 +18,8 @@ export class SchoolRepository {
   async findByName(name: string): Promise<School | undefined> {
     return this.schoolRepository.findOne({ where: { name } });
   }
+
+  async findById(id: number): Promise<School | undefined> {
+    return this.schoolRepository.findOne({ where: { id } });
+  }
 }
