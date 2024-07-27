@@ -9,9 +9,9 @@ export class MailService {
 
   async sendForgotPasswordConfirmation(
     schoolMember: SchoolMember,
-    token: string = 'abc123',
+    token: string,
   ): Promise<void> {
-    const url = `example.com/auth/confirm?token=${token}`; //TODO - change this to the actual url
+    const url = `localhost:3000/auth/change-password?token=${token}`; //TODO - change this to the actual url
 
     await this.mailerService.sendMail({
       to: schoolMember.email,

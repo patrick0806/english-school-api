@@ -1,5 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { I18nContext, I18nService } from 'nestjs-i18n';
+
+import { env } from '@config/env';
 
 import { MailService } from '@shared/providers/mail/mail.service';
 import { SchoolMemberRepository } from '@shared/repositories';
@@ -9,6 +12,7 @@ export class ForgotPasswordService {
   constructor(
     private schoolMemberRepository: SchoolMemberRepository,
     private mailService: MailService,
+    private jwtService: JwtService,
     private i18n: I18nService,
   ) {}
 
@@ -32,9 +36,18 @@ export class ForgotPasswordService {
         }),
       });
     }
-    schoolMember.email = 'patrickk0806@gmail.com';
+
+    const payload = {
+      sub: schoolMember.id,
+    };
+
+    const resetPasswordToken = this.jwtService.sign(payload, {
+      secret: env.JWT_SECRET,
+      expiresIn: '1d',
+    });
+
     this.mailService
-      .sendForgotPasswordConfirmation(schoolMember)
+      .sendForgotPasswordConfirmation(schoolMember, resetPasswordToken)
       .catch((error) => {
         console.log('Failed to send email', error);
       });
