@@ -7,7 +7,6 @@ import { plainToClass } from 'class-transformer';
 import { I18nContext, I18nService } from 'nestjs-i18n';
 
 import { SchoolMember } from '@shared/entities';
-import { SchoolMemberRole } from '@shared/enums';
 import { SchoolMemberRepository, SchoolRepository } from '@shared/repositories';
 import { hashPassword, onlyNumbers } from '@shared/utils';
 
@@ -69,7 +68,7 @@ export class CreateSchoolMemberService {
     const schoolMemberCode = this.generateSchoolMemberCode(
       totalSchoolMembers,
       school.name,
-      schoolMember.role,
+      schoolMember,
     );
 
     schoolMember.userCode = schoolMemberCode;
@@ -85,12 +84,12 @@ export class CreateSchoolMemberService {
   private generateSchoolMemberCode(
     totalSchoolMembers: number,
     schoolName: string,
-    memberRole: SchoolMemberRole,
+    schoolMember: SchoolMember,
   ): string {
     //TODO back when have course name too
     const schoolNameFirstLetter = schoolName.charAt(0).toUpperCase();
-    const roleFirstLetter = memberRole.charAt(0).toUpperCase();
-    const shortName = schoolName
+    const roleFirstLetter = schoolMember.role.charAt(0).toUpperCase();
+    const shortName = schoolMember.name
       .split(' ')
       .map((name) => name.charAt(0))
       .join('')
