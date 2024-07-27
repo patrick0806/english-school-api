@@ -1,10 +1,12 @@
 {
   "error": {
     "CONFLICT_ENTITY": "Conflito de entidade",
-    "NOT_FOUND_ENTITY": "Entidade não encontrada"
+    "NOT_FOUND_ENTITY": "Entidade não encontrada",
+    "UNAUTHORIZED": "Não autorizado"
   },
   "message": {
     "CONFLICT_ENTITY": "Entidade já existe",
-    "NOT_FOUND_ENTITY": "{entityName} com valor {propertyValue} não encontrada"
+    "NOT_FOUND_ENTITY": "{entityName} com valor {propertyValue} não encontrada",
+    "INVALID_CREDENTIALS": "Credenciais inválidas, verifique seu email e senha"
   }
 }

@@ -1,22 +1,50 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
+import { I18nContext, I18nService } from 'nestjs-i18n';
 import { Strategy } from 'passport-local';
+
+import { SchoolMember } from '@shared/entities';
+import { SchoolMemberRepository } from '@shared/repositories';
+import { comparePassword } from '@shared/utils';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(
+    private schoolMemberRepository: SchoolMemberRepository,
+    private i18n: I18nService,
+  ) {
     super();
   }
 
-  async validate(username: string, password: string): Promise<any> {
-    console.log('################');
-    const user = username === 'admin' && password === 'admin';
-    if (!user) {
+  async validate(email: string, password: string): Promise<SchoolMember> {
+    const schoolMember = await this.schoolMemberRepository.findByEmail(email);
+
+    if (
+      !schoolMember ||
+      schoolMember.isActive === false ||
+      schoolMember.school.isActive === false
+    ) {
       throw new UnauthorizedException({
-        error: 'Unauthorized',
-        message: 'Invalid credentials, check your email and password',
+        error: this.i18n.t('exceptions.error.UNAUTHORIZED', {
+          lang: I18nContext.current().lang,
+        }),
+        message: this.i18n.t('exceptions.message.INVALID_CREDENTIALS', {
+          lang: I18nContext.current().lang,
+        }),
       });
     }
-    return user;
+
+    const isPasswordValid = comparePassword(password, schoolMember.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException({
+        error: this.i18n.t('exceptions.error.UNAUTHORIZED', {
+          lang: I18nContext.current().lang,
+        }),
+        message: this.i18n.t('exceptions.message.INVALID_CREDENTIALS', {
+          lang: I18nContext.current().lang,
+        }),
+      });
+    }
+    return schoolMember;
   }
 }

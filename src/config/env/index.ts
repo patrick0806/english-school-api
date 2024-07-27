@@ -5,6 +5,8 @@ export const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   JWT_SECRET: process.env.JWT_SECRET || 'secret',
   JWT_EXPIRATION: process.env.JWT_EXPIRATION || '1d',
+  JWT_REFRESH_SECRET: process.env.JWT_REFRESH || 'refresh',
+  JWT_REFRESH_EXPIRATION: process.env.JWT_REFRESH_EXPIRATION || '2d',
   DATABASE: {
     TYPE: process.env.DATABASE_TYPE || 'postgres',
     HOST: process.env.DATABASE_HOST || 'localhost',

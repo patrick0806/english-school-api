@@ -1,0 +1,15 @@
+import { ApiProperty } from '@nestjs/swagger';
+
+export class LoginResponseDTO {
+  @ApiProperty({
+    example:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaW4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+  })
+  accessToken: string;
+
+  @ApiProperty({ example: 'tGzv3JOkF0XG5Qx2TlKWIA' })
+  refreshToken: string;
+
+  @ApiProperty({ example: 'Bearer' })
+  tokenType: string;
+}

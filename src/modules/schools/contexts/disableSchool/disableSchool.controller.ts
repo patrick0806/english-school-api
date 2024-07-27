@@ -1,8 +1,12 @@
 import { Controller, Param, Patch } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { API_TAGS } from '@shared/constants';
-import { Public } from '@shared/decorators';
 
 import { DisableSchoolService } from './disableSchool.service';
 import { DisableSchoolResponseDTO } from './dtos/response.dto';
@@ -12,8 +16,7 @@ import { DisableSchoolResponseDTO } from './dtos/response.dto';
 export class DisableSchoolController {
   constructor(private disableSchoolService: DisableSchoolService) {}
 
-  //TODO - Implement  Bearer security
-  @Public()
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Disable a school' })
   @ApiOkResponse({
     description: 'The school has been successfully created',

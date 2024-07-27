@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { env } from '@config/env';
+import { SchoolMember } from '@shared/entities';
+import { SchoolMemberRepository } from '@shared/repositories';
 
 import { LoginController } from './contexts/login/login.controller';
 import { LoginService } from './contexts/login/login.service';
@@ -10,12 +12,10 @@ import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
-    JwtModule.register({
-      secret: env.JWT_SECRET,
-      signOptions: { expiresIn: env.JWT_EXPIRATION },
-    }),
+    TypeOrmModule.forFeature([SchoolMember]),
+    JwtModule.register({ global: true }),
   ],
   controllers: [LoginController],
-  providers: [LoginService, LocalStrategy, JwtStrategy],
+  providers: [LoginService, LocalStrategy, JwtStrategy, SchoolMemberRepository],
 })
 export class AuthModule {}
