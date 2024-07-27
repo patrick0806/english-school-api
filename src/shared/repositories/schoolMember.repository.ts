@@ -21,9 +21,12 @@ export class SchoolMemberRepository {
     });
   }
 
-  async findByEmail(email: string): Promise<SchoolMember | undefined> {
+  async findByEmail(
+    email: string,
+    schoolId: number,
+  ): Promise<SchoolMember | undefined> {
     return this.schoolMemberRepository.findOne({
-      where: { email },
+      where: { email, school: { id: schoolId } },
       relations: { school: true },
     });
   }

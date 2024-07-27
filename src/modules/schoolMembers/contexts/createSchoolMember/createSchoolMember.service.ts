@@ -44,6 +44,7 @@ export class CreateSchoolMemberService {
 
     const schoolMemberExists = await this.schoolMemberRepository.findByEmail(
       schoolMemberData.email,
+      schoolMemberData.school.id,
     );
 
     if (schoolMemberExists) {

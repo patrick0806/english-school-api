@@ -75,12 +75,16 @@ describe('Create School Context', () => {
     const requestDTO = {
       email: schoolMemberMock.email,
       password: '123456',
+      schoolId: schoolMemberMock.school.id,
     };
 
     const result = await controller.handle(requestDTO);
 
     expect(repository.findByEmail).toBeCalledTimes(1);
-    expect(repository.findByEmail).toHaveBeenCalledWith(schoolMemberMock.email);
+    expect(repository.findByEmail).toHaveBeenCalledWith(
+      schoolMemberMock.email,
+      schoolMemberMock.school.id,
+    );
     expect(
       assert.deepStrictEqual(
         result,
@@ -103,6 +107,7 @@ describe('Create School Context', () => {
     const requestDTO = {
       email: schoolMemberMock.email,
       password: '123456',
+      schoolId: schoolMemberMock.school.id,
     };
 
     try {
@@ -118,6 +123,7 @@ describe('Create School Context', () => {
     const requestDTO = {
       email: schoolMemberMock.email,
       password: '1256',
+      schoolId: schoolMemberMock.school.id,
     };
 
     try {
@@ -136,6 +142,7 @@ describe('Create School Context', () => {
     const requestDTO = {
       email: schoolMemberMock.email,
       password: '123456',
+      schoolId: schoolMemberMock.school.id,
     };
 
     try {

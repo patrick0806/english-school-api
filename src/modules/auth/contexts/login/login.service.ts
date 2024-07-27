@@ -23,6 +23,7 @@ export class LoginService {
     const schoolMember = await this.localStrategy.validate(
       loginData.email,
       loginData.password,
+      loginData.schoolId,
     );
 
     const payload: IDecodedToken = {

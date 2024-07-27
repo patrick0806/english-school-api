@@ -16,8 +16,15 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super();
   }
 
-  async validate(email: string, password: string): Promise<SchoolMember> {
-    const schoolMember = await this.schoolMemberRepository.findByEmail(email);
+  async validate(
+    email: string,
+    password: string,
+    schoolId: number,
+  ): Promise<SchoolMember> {
+    const schoolMember = await this.schoolMemberRepository.findByEmail(
+      email,
+      schoolId,
+    );
 
     if (
       !schoolMember ||
