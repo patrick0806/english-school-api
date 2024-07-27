@@ -3,6 +3,11 @@ import { JwtService } from '@nestjs/jwt';
 
 import { env } from '@config/env';
 
+import {
+  IDecodedRefreshToken,
+  IDecodedToken,
+} from '@shared/interfaces/decodedToken.interface';
+
 import { LocalStrategy } from '@modules/auth/strategies/local.strategy';
 
 import { LoginRequestDTO } from './dtos/request.dto';
@@ -20,10 +25,14 @@ export class LoginService {
       loginData.password,
     );
 
-    const payload = {
+    const payload: IDecodedToken = {
       email: schoolMember.email,
       schoolId: schoolMember.school.id,
       role: schoolMember.role,
+      sub: schoolMember.id,
+    };
+
+    const refreshTokenPayload: IDecodedRefreshToken = {
       sub: schoolMember.id,
     };
 
@@ -32,13 +41,10 @@ export class LoginService {
         expiresIn: env.JWT_EXPIRATION,
         secret: env.JWT_SECRET,
       }),
-      refreshToken: this.jwtService.sign(
-        { sub: schoolMember.id },
-        {
-          expiresIn: env.JWT_REFRESH_EXPIRATION,
-          secret: env.JWT_REFRESH_SECRET,
-        },
-      ),
+      refreshToken: this.jwtService.sign(refreshTokenPayload, {
+        expiresIn: env.JWT_REFRESH_EXPIRATION,
+        secret: env.JWT_REFRESH_SECRET,
+      }),
       tokenType: 'Bearer',
     };
   }
