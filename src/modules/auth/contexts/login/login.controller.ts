@@ -22,6 +22,6 @@ export class LoginController {
   @Post()
   @HttpCode(200)
   async handle(@Body() loginData: LoginRequestDTO): Promise<LoginResponseDTO> {
-    return await this.loginService.execute(loginData);
+    return this.loginService.execute(loginData);
   }
 }

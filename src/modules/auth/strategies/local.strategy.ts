@@ -25,10 +25,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       schoolMember.school.isActive === false
     ) {
       throw new UnauthorizedException({
-        error: this.i18n.t('exceptions.error.UNAUTHORIZED', {
+        error: this.i18n.translate('exceptions.error.UNAUTHORIZED', {
           lang: I18nContext.current().lang,
         }),
-        message: this.i18n.t('exceptions.message.INVALID_CREDENTIALS', {
+        message: this.i18n.translate('exceptions.message.INVALID_CREDENTIALS', {
           lang: I18nContext.current().lang,
         }),
       });
@@ -37,10 +37,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     const isPasswordValid = comparePassword(password, schoolMember.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException({
-        error: this.i18n.t('exceptions.error.UNAUTHORIZED', {
+        error: this.i18n.translate('exceptions.error.UNAUTHORIZED', {
           lang: I18nContext.current().lang,
         }),
-        message: this.i18n.t('exceptions.message.INVALID_CREDENTIALS', {
+        message: this.i18n.translate('exceptions.message.INVALID_CREDENTIALS', {
           lang: I18nContext.current().lang,
         }),
       });
