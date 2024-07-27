@@ -45,7 +45,7 @@ export class BaseSchema1721851481652 implements MigrationInterface {
         "id" SERIAL PRIMARY KEY,
         "name" VARCHAR(70) NOT NULL,
         "email" VARCHAR(50) NOT NULL,
-        "password" VARCHAR(30) NOT NULL,
+        "password" VARCHAR(255) NOT NULL,
         "phone_number" VARCHAR(20),
         "user_code" VARCHAR(20) UNIQUE NOT NULL,
         "is_active" BOOLEAN DEFAULT TRUE NOT NULL,

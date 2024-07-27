@@ -15,6 +15,7 @@ import { JWTAuthGuard } from '@shared/guards';
 
 import { AuthModule } from '@modules/auth/auth.module';
 import { HealthModule } from '@modules/health/health.module';
+import { SchoolMembersModule } from '@modules/schoolMembers/schoolMembers.module';
 import { SchoolsModule } from '@modules/schools/schools.module';
 
 @Module({
@@ -39,6 +40,7 @@ import { SchoolsModule } from '@modules/schools/schools.module';
     HealthModule,
     AuthModule,
     SchoolsModule,
+    SchoolMembersModule,
     RouterModule.register([
       {
         path: 'health',
@@ -47,6 +49,10 @@ import { SchoolsModule } from '@modules/schools/schools.module';
       {
         path: 'auth',
         module: AuthModule,
+      },
+      {
+        path: 'school-members',
+        module: SchoolMembersModule,
       },
       {
         path: 'schools',

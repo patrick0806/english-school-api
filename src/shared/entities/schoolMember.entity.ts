@@ -30,7 +30,7 @@ export class SchoolMember {
   @Column({ type: 'varchar', length: 50, nullable: false })
   email: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
 
   @Column({ type: 'varchar', length: 20, name: 'phone_number', nullable: true })
@@ -55,7 +55,7 @@ export class SchoolMember {
   @JoinColumn({ name: 'school_id' })
   school: Relation<School>;
 
-  @OneToMany(
+  /*@OneToMany(
     () => SchoolMemberContract,
     (schoolMemberContract) => schoolMemberContract.schoolMember,
   )
@@ -75,7 +75,7 @@ export class SchoolMember {
     joinColumn: { name: 'group_id' },
     inverseJoinColumn: { name: 'user_id' },
   })
-  groups: Relation<Group[]>;
+  groups: Relation<Group[]>;*/
 
   @CreateDateColumn({ type: 'time with time zone', name: 'created_at' })
   createdAt: Date;

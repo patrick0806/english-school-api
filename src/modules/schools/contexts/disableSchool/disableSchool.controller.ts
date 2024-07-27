@@ -8,7 +8,7 @@ import { DisableSchoolService } from './disableSchool.service';
 import { DisableSchoolResponseDTO } from './dtos/response.dto';
 
 @ApiTags(API_TAGS.SCHOOL)
-@Controller()
+@Controller({ version: '1' })
 export class DisableSchoolController {
   constructor(private disableSchoolService: DisableSchoolService) {}
 
