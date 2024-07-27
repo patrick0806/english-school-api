@@ -37,8 +37,8 @@ export class Group {
   @ManyToMany(() => SchoolMember, (schoolMember) => schoolMember.groups)
   @JoinTable({
     name: 'school_members_groups',
-    joinColumn: { name: 'group_id' },
-    inverseJoinColumn: { name: 'user_id' },
+    joinColumn: { name: 'school_members_id' },
+    inverseJoinColumn: { name: 'group_id' },
   })
   schoolMembers: Relation<SchoolMember[]>;
 

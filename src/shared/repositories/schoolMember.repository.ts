@@ -12,15 +12,27 @@ export class SchoolMemberRepository {
   ) {}
 
   async save(schoolMember: SchoolMember): Promise<SchoolMember> {
-    return this.schoolMemberRepository.save(schoolMember);
+    const savedSchoolMember =
+      await this.schoolMemberRepository.save(schoolMember);
+
+    return this.schoolMemberRepository.findOne({
+      where: { id: savedSchoolMember.id },
+      relations: { school: true },
+    });
   }
 
   async findByEmail(email: string): Promise<SchoolMember | undefined> {
-    return this.schoolMemberRepository.findOne({ where: { email } });
+    return this.schoolMemberRepository.findOne({
+      where: { email },
+      relations: { school: true },
+    });
   }
 
   async findById(id: number): Promise<SchoolMember | undefined> {
-    return this.schoolMemberRepository.findOne({ where: { id } });
+    return this.schoolMemberRepository.findOne({
+      where: { id },
+      relations: { school: true },
+    });
   }
 
   async findBySchoolId(schoolId: number): Promise<SchoolMember[]> {

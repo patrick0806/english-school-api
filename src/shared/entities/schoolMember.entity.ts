@@ -55,7 +55,7 @@ export class SchoolMember {
   @JoinColumn({ name: 'school_id' })
   school: Relation<School>;
 
-  /*@OneToMany(
+  @OneToMany(
     () => SchoolMemberContract,
     (schoolMemberContract) => schoolMemberContract.schoolMember,
   )
@@ -69,13 +69,13 @@ export class SchoolMember {
   })
   courses: Relation<Course[]>;
 
-  @ManyToOne(() => Group, (group) => group.schoolMembers)
+  @ManyToMany(() => Group, (group) => group.schoolMembers)
   @JoinTable({
     name: 'school_members_groups',
-    joinColumn: { name: 'group_id' },
-    inverseJoinColumn: { name: 'user_id' },
+    joinColumn: { name: 'school_members_id' },
+    inverseJoinColumn: { name: 'group_id' },
   })
-  groups: Relation<Group[]>;*/
+  groups: Relation<Group[]>;
 
   @CreateDateColumn({ type: 'time with time zone', name: 'created_at' })
   createdAt: Date;
