@@ -6,7 +6,7 @@ export class LoginRequestDTO {
   @ApiProperty({ example: 'jhondoe@gmail.com' })
   email: string;
 
-  @IsString()
+  @IsString({ message: 'validation.INVALID_STRING' })
   @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
   @ApiProperty({ example: 'somepass' })
   password: string;

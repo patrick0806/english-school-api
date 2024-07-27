@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { I18nContext, I18nService } from 'nestjs-i18n';
 
@@ -44,7 +48,7 @@ export class CreateSchoolMemberService {
     );
 
     if (schoolMemberExists) {
-      throw new NotFoundException({
+      throw new ConflictException({
         error: this.i18n.translate('exceptions.error.CONFLICT_ENTITY', {
           lang: I18nContext.current().lang,
         }),

@@ -7,6 +7,8 @@ import { SchoolMemberRepository } from '@shared/repositories';
 
 import { LoginController } from './contexts/login/login.controller';
 import { LoginService } from './contexts/login/login.service';
+import { RefreshTokenController } from './contexts/refreshToken/refreshToken.controller';
+import { RefreshTokenService } from './contexts/refreshToken/refreshToken.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 
@@ -15,7 +17,13 @@ import { LocalStrategy } from './strategies/local.strategy';
     TypeOrmModule.forFeature([SchoolMember]),
     JwtModule.register({ global: true }),
   ],
-  controllers: [LoginController],
-  providers: [LoginService, LocalStrategy, JwtStrategy, SchoolMemberRepository],
+  controllers: [LoginController, RefreshTokenController],
+  providers: [
+    LoginService,
+    RefreshTokenService,
+    LocalStrategy,
+    JwtStrategy,
+    SchoolMemberRepository,
+  ],
 })
 export class AuthModule {}
