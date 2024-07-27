@@ -24,4 +24,21 @@ export class MailService {
       },
     });
   }
+
+  async sendWelcomeEmail(
+    schoolMember: SchoolMember,
+    password: string,
+  ): Promise<void> {
+    await this.mailerService.sendMail({
+      to: schoolMember.email,
+      subject: `${schoolMember.school.name} | Welcome!`,
+      template: './welcome',
+      context: {
+        name: schoolMember.name,
+        email: schoolMember.email,
+        password,
+        schoolName: schoolMember.school.name,
+      },
+    });
+  }
 }
