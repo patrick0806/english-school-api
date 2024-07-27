@@ -1,9 +1,8 @@
 import { ConflictException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { plainToClass } from 'class-transformer';
-import { I18nModule, I18nService } from 'nestjs-i18n';
+import { I18nService } from 'nestjs-i18n';
 import assert from 'node:assert';
-import { join } from 'path';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { SchoolDTO } from '@shared/dtos';
@@ -33,15 +32,7 @@ describe('Create School Context', () => {
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      imports: [
-        I18nModule.forRoot({
-          fallbackLanguage: 'en',
-          loaderOptions: {
-            path: join(__dirname, '../../../', '/config/i18n/'),
-            watch: true,
-          },
-        }),
-      ],
+      imports: [],
       controllers: [CreateSchoolController],
       providers: [
         CreateSchoolService,
