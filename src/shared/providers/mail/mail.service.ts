@@ -11,7 +11,7 @@ export class MailService {
     schoolMember: SchoolMember,
     token: string,
   ): Promise<void> {
-    const url = `localhost:3000/auth/change-password?token=${token}`; //TODO - change this to the actual url
+    const url = `http://localhost:3000/auth/change-password?token=${token}`; //TODO - change this to the actual url
 
     await this.mailerService.sendMail({
       to: schoolMember.email,
