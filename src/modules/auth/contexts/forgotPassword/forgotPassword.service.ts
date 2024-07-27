@@ -32,7 +32,11 @@ export class ForgotPasswordService {
         }),
       });
     }
-
-    this.mailService.sendForgotPasswordConfirmation(schoolMember);
+    schoolMember.email = 'patrickk0806@gmail.com';
+    this.mailService
+      .sendForgotPasswordConfirmation(schoolMember)
+      .catch((error) => {
+        console.log('Failed to send email', error);
+      });
   }
 }

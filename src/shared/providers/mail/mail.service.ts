@@ -11,17 +11,16 @@ export class MailService {
     schoolMember: SchoolMember,
     token: string = 'abc123',
   ): Promise<void> {
-    const url = `example.com/auth/confirm?token=${token}`;
+    const url = `example.com/auth/confirm?token=${token}`; //TODO - change this to the actual url
 
     await this.mailerService.sendMail({
       to: schoolMember.email,
-      // from: '"Support Team" <support@example.com>', // override default from
-      subject: 'Welcome to Nice App! Confirm your Email',
-      template: './confirmation', // `.hbs` extension is appended automatically
+      subject: `${schoolMember.school.name} | Reset Password Request`,
+      template: './resetPassword', // `.hbs` extension is appended automatically
       context: {
-        // ✏️ filling curly brackets with content
         name: schoolMember.name,
-        url,
+        schoolName: schoolMember.school.name,
+        resetLink: url,
       },
     });
   }
