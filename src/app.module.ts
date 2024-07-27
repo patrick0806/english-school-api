@@ -21,6 +21,7 @@ import { SchoolsModule } from '@modules/schools/schools.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: '.env',
       isGlobal: true,
       expandVariables: true, // load .env variables
       load: [typeorm],
