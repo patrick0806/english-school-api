@@ -7,6 +7,7 @@ import { plainToClass } from 'class-transformer';
 import { I18nContext, I18nService } from 'nestjs-i18n';
 
 import { SchoolMember } from '@shared/entities';
+import { MailService } from '@shared/providers/mail/mail.service';
 import { SchoolMemberRepository, SchoolRepository } from '@shared/repositories';
 import { hashPassword, onlyNumbers } from '@shared/utils';
 
@@ -18,6 +19,7 @@ export class CreateSchoolMemberService {
   constructor(
     private schoolMemberRepository: SchoolMemberRepository,
     private schoolRepository: SchoolRepository,
+    private mailService: MailService,
     private i18n: I18nService,
   ) {}
 
@@ -79,6 +81,10 @@ export class CreateSchoolMemberService {
     const savedSchoolMember =
       await this.schoolMemberRepository.save(schoolMember);
 
+    this.mailService.sendWelcomeEmail(
+      savedSchoolMember,
+      schoolMemberData.password,
+    );
     return plainToClass(CreateSchoolMemberResponseDTO, savedSchoolMember);
   }
 
