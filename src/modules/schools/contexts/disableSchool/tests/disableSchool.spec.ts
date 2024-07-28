@@ -25,7 +25,7 @@ vi.mock('nestjs-i18n', async (importOriginal) => {
   };
 });
 
-describe('Create School Context', () => {
+describe('Disable Context', () => {
   let controller: DisableSchoolController;
   let service: DisableSchoolService;
   let repository: SchoolRepository;

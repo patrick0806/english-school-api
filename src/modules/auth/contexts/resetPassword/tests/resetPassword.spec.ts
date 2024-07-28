@@ -1,15 +1,14 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 import { I18nService } from 'nestjs-i18n';
-import assert from 'node:assert';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { schoolMemberMock } from '@shared/mocks/schoolMember.mock';
 import { SchoolMemberRepository } from '@shared/repositories';
 
-import { RefreshTokenController } from '../refreshToken.controller';
-import { RefreshTokenService } from '../refreshToken.service';
+import { ResetPasswordController } from '../resetPassword.controller';
+import { ResetPasswordService } from '../resetPassword.service';
 
 vi.mock('nestjs-i18n', async (importOriginal) => {
   const actual = (await importOriginal()) as any;
@@ -24,21 +23,21 @@ vi.mock('nestjs-i18n', async (importOriginal) => {
   };
 });
 
-describe('Refresh Token Context', () => {
-  let controller: RefreshTokenController;
-  let service: RefreshTokenService;
+describe('Reset Password Context', () => {
+  let controller: ResetPasswordController;
+  let service: ResetPasswordService;
+  let jwtService: JwtService;
   let repository: SchoolMemberRepository;
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [],
-      controllers: [RefreshTokenController],
+      controllers: [ResetPasswordController],
       providers: [
-        RefreshTokenService,
+        ResetPasswordService,
         {
           provide: JwtService,
           useValue: {
-            sign: vi.fn().mockReturnValue('token'),
             verify: vi.fn().mockReturnValue({ sub: schoolMemberMock.id }),
           },
         },
@@ -52,90 +51,68 @@ describe('Refresh Token Context', () => {
           provide: SchoolMemberRepository,
           useValue: {
             findById: vi.fn(),
+            save: vi.fn().mockResolvedValue(schoolMemberMock),
           },
         },
       ],
     }).compile();
 
-    controller = module.get<RefreshTokenController>(RefreshTokenController);
-    service = module.get<RefreshTokenService>(RefreshTokenService);
+    controller = module.get<ResetPasswordController>(ResetPasswordController);
+    service = module.get<ResetPasswordService>(ResetPasswordService);
     repository = module.get<SchoolMemberRepository>(SchoolMemberRepository);
+    jwtService = module.get<JwtService>(JwtService);
   });
 
   it('Should be defined', () => {
     expect(controller).toBeDefined();
     expect(service).toBeDefined();
     expect(repository).toBeDefined();
+    expect(jwtService).toBeDefined();
   });
 
-  it('should refresh user token with success', async () => {
+  it('should reset user password with success', async () => {
     vi.spyOn(repository, 'findById').mockResolvedValue(schoolMemberMock);
     const requestDTO = {
-      refreshToken: 'token',
+      resetToken: 'token',
+      password: 'newPassword',
     };
 
     const result = await controller.handle(requestDTO);
 
     expect(repository.findById).toBeCalledTimes(1);
     expect(repository.findById).toHaveBeenCalledWith(schoolMemberMock.id);
-    expect(
-      assert.deepStrictEqual(
-        result,
-        {
-          accessToken: 'token',
-          refreshToken: 'token',
-          tokenType: 'Bearer',
-        },
-        'RefreshToken DTO result are not equals a spected mock result',
-      ),
-    ).toBeUndefined();
+    expect(result).toBeUndefined();
   });
 
-  it('should block refresh if school are deactivated', async () => {
-    vi.spyOn(repository, 'findById').mockResolvedValue({
-      ...schoolMemberMock,
-      school: { ...schoolMemberMock.school, isActive: false },
-    });
-
+  it('should throw an error when user is not found', async () => {
+    vi.spyOn(repository, 'findById').mockResolvedValue(null);
     const requestDTO = {
-      refreshToken: 'token',
+      resetToken: 'token',
+      password: 'newPassword',
     };
 
     try {
       await controller.handle(requestDTO);
     } catch (error) {
-      expect(error).toBeInstanceOf(UnauthorizedException);
+      expect(error).toBeInstanceOf(NotFoundException);
     }
   });
 
-  it('should block refresh if school member password dont match', async () => {
+  it('should throw an error when reset token is invalid', async () => {
     vi.spyOn(repository, 'findById').mockResolvedValue(schoolMemberMock);
+    vi.spyOn(jwtService, 'verify').mockRejectedValue(
+      new BadRequestException('Invalid token'),
+    );
 
     const requestDTO = {
-      refreshToken: 'token',
+      resetToken: 'token',
+      password: 'newPassword',
     };
 
     try {
       await controller.handle(requestDTO);
     } catch (error) {
-      expect(error).toBeInstanceOf(UnauthorizedException);
-    }
-  });
-
-  it('should block refresh if school member are deactivated', async () => {
-    vi.spyOn(repository, 'findById').mockResolvedValue({
-      ...schoolMemberMock,
-      school: { ...schoolMemberMock.school, isActive: false },
-    });
-
-    const requestDTO = {
-      refreshToken: 'token',
-    };
-
-    try {
-      await controller.handle(requestDTO);
-    } catch (error) {
-      expect(error).toBeInstanceOf(UnauthorizedException);
+      expect(error).toBeInstanceOf(BadRequestException);
     }
   });
 });

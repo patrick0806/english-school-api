@@ -2,12 +2,14 @@
   "error": {
     "CONFLICT_ENTITY": "Conflito de entidade",
     "NOT_FOUND_ENTITY": "Entidade não encontrada",
-    "UNAUTHORIZED": "Não autorizado"
+    "UNAUTHORIZED": "Não autorizado",
+    "BAD_REQUEST": "Requisição inválida"
   },
   "message": {
     "CONFLICT_ENTITY": "Entidade já existe",
     "NOT_FOUND_ENTITY": "{entityName} com valor {propertyValue} não encontrada",
     "INVALID_CREDENTIALS": "Credenciais inválidas, verifique seu email e senha",
-    "INVALID_TOKEN": "Token inválido"
+    "INVALID_TOKEN": "Token inválido",
+    "INVALID_RESET_TOKEN": "Token de redefinição inválido"
   }
 }

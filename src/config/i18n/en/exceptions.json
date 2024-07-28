@@ -2,12 +2,14 @@
   "error": {
     "CONFLICT_ENTITY": "Entity conflict",
     "NOT_FOUND_ENTITY": "Entity not found",
-    "UNAUTHORIZED": "Unauthorized"
+    "UNAUTHORIZED": "Unauthorized",
+    "BAD_REQUEST": "Bad request"
   },
   "message": {
     "CONFLICT_ENTITY": "Entity already exists",
     "NOT_FOUND_ENTITY": "{entityName} with value {propertyValue} not found",
     "INVALID_CREDENTIALS": "Invalid credentials, check your email and password",
-    "INVALID_TOKEN": "Invalid token"
+    "INVALID_TOKEN": "Invalid token",
+    "INVALID_RESET": "Invalid reset token"
   }
 }
