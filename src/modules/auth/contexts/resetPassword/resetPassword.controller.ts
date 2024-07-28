@@ -2,10 +2,10 @@ import { Body, Controller, Patch } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { API_TAGS } from '@shared/constants';
+import { Public } from '@shared/decorators';
 
 import { ResetPasswordRequestDTO } from './dtos/request.dto';
 import { ResetPasswordService } from './resetPassword.service';
-import { Public } from '@shared/decorators';
 
 @Public()
 @ApiTags(API_TAGS.AUTH)
