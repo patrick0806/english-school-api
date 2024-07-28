@@ -7,12 +7,14 @@ import {
 } from '@nestjs/swagger';
 
 import { API_TAGS } from '@shared/constants';
+import { Roles } from '@shared/decorators';
+import { SchoolMemberRole } from '@shared/enums';
 
 import { CreateSchoolService } from './createSchool.service';
 import { CreateSchoolRequestDTO } from './dtos/request.dto';
 import { CreateSchoolResponseDTO } from './dtos/response.dto';
 
-//TODO - implement Role Guard
+@Roles(SchoolMemberRole.ADMIN)
 @ApiTags(API_TAGS.SCHOOL)
 @Controller({ version: '1' })
 export class CreateSchoolController {

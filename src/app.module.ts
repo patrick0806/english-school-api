@@ -11,9 +11,10 @@ import {
   HttpExceptionFilter,
   ValidationExceptionFilter,
 } from '@shared/filters';
-import { JWTAuthGuard } from '@shared/guards';
+import { JWTAuthGuard, RolesGuard } from '@shared/guards';
 
 import { AuthModule } from '@modules/auth/auth.module';
+import { CourseModule } from '@modules/course/course.module';
 import { HealthModule } from '@modules/health/health.module';
 import { SchoolMembersModule } from '@modules/schoolMembers/schoolMembers.module';
 import { SchoolsModule } from '@modules/schools/schools.module';
@@ -40,6 +41,7 @@ import { SchoolsModule } from '@modules/schools/schools.module';
     }),
     HealthModule,
     AuthModule,
+    CourseModule,
     SchoolsModule,
     SchoolMembersModule,
     RouterModule.register([
@@ -50,6 +52,10 @@ import { SchoolsModule } from '@modules/schools/schools.module';
       {
         path: 'auth',
         module: AuthModule,
+      },
+      {
+        path: 'courses',
+        module: CourseModule,
       },
       {
         path: 'school-members',
@@ -66,6 +72,10 @@ import { SchoolsModule } from '@modules/schools/schools.module';
     {
       provide: 'APP_GUARD',
       useClass: JWTAuthGuard,
+    },
+    {
+      provide: 'APP_GUARD',
+      useClass: RolesGuard,
     },
     {
       provide: 'APP_FILTER',

@@ -7,10 +7,13 @@ import {
 } from '@nestjs/swagger';
 
 import { API_TAGS } from '@shared/constants';
+import { Roles } from '@shared/decorators';
+import { SchoolMemberRole } from '@shared/enums';
 
 import { DisableSchoolService } from './disableSchool.service';
 import { DisableSchoolResponseDTO } from './dtos/response.dto';
 
+@Roles(SchoolMemberRole.ADMIN)
 @ApiTags(API_TAGS.SCHOOL)
 @Controller({ version: '1' })
 export class DisableSchoolController {

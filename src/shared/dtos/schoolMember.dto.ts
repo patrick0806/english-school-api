@@ -3,6 +3,7 @@ import { Exclude } from 'class-transformer';
 
 import { SchoolMemberRole } from '@shared/enums';
 
+import { CourseDTO } from './course.dto';
 import { SchoolDTO } from './school.dto';
 
 export class SchoolMemberDTO {
@@ -30,12 +31,14 @@ export class SchoolMemberDTO {
   @ApiProperty({ example: SchoolMemberRole.TEACHER, enum: SchoolMemberRole })
   role: SchoolMemberRole;
 
-  @ApiProperty({ example: 'SchoolDTO' })
+  @ApiProperty({ type: () => SchoolDTO })
   school: SchoolDTO;
+
+  @ApiProperty({ type: () => [CourseDTO] })
+  courses: CourseDTO[];
   // TODO - add SchoolMemberContractDTO
   // TODO - add CourseDTO
   // TODO - add GroupDTO
-
   @ApiProperty({ example: '2021-09-01T00:00:00.000Z' })
   createdAt: Date;
 

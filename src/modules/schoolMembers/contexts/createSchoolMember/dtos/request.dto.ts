@@ -11,15 +11,15 @@ import {
 
 import { SchoolMemberRole } from '@shared/enums';
 
-class SchoolDTO {
-  @IsNotEmpty()
-  @IsNumber()
+class MemberSchoolDTO {
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsNumber({}, { message: 'validation.INVALID_NUMBER' })
   @ApiProperty({ example: 1 })
   id: number;
 }
 
 export class CreateSchoolMemberRequestDTO {
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
   @ApiProperty({
     example: 'John Doe',
     description: 'User name',
@@ -27,7 +27,7 @@ export class CreateSchoolMemberRequestDTO {
   })
   name: string;
 
-  @IsEmail()
+  @IsEmail({}, { message: 'validation.INVALID_EMAIL' })
   @ApiProperty({
     example: 'jhondoe@email.com',
     description: 'User email',
@@ -36,7 +36,7 @@ export class CreateSchoolMemberRequestDTO {
   email: string;
 
   @IsOptional()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
   @ApiProperty({
     example: '123456',
     description: 'User password',
@@ -45,7 +45,7 @@ export class CreateSchoolMemberRequestDTO {
   password: string;
 
   @IsOptional()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
   @ApiProperty({
     example: '99999999999',
     description: 'User phonenumber confirmation',
@@ -58,7 +58,7 @@ export class CreateSchoolMemberRequestDTO {
   role: SchoolMemberRole;
 
   @ValidateNested()
-  @Type(() => SchoolDTO)
+  @Type(() => MemberSchoolDTO)
   @ApiProperty({ example: { id: 1 } })
-  school: SchoolDTO;
+  school: MemberSchoolDTO;
 }

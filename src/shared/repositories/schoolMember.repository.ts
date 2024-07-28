@@ -17,7 +17,7 @@ export class SchoolMemberRepository {
 
     return this.schoolMemberRepository.findOne({
       where: { id: savedSchoolMember.id },
-      relations: { school: true },
+      relations: { school: true, courses: true },
     });
   }
 
@@ -27,14 +27,14 @@ export class SchoolMemberRepository {
   ): Promise<SchoolMember | undefined> {
     return this.schoolMemberRepository.findOne({
       where: { email, school: { id: schoolId } },
-      relations: { school: true },
+      relations: { school: true, courses: true },
     });
   }
 
   async findById(id: number): Promise<SchoolMember | undefined> {
     return this.schoolMemberRepository.findOne({
       where: { id },
-      relations: { school: true },
+      relations: { school: true, courses: true },
     });
   }
 

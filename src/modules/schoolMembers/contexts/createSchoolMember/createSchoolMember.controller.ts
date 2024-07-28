@@ -7,11 +7,14 @@ import {
 } from '@nestjs/swagger';
 
 import { API_TAGS } from '@shared/constants';
+import { Roles } from '@shared/decorators';
+import { SchoolMemberRole } from '@shared/enums';
 
 import { CreateSchoolMemberService } from './createSchoolMember.service';
 import { CreateSchoolMemberRequestDTO } from './dtos/request.dto';
 import { CreateSchoolMemberResponseDTO } from './dtos/response.dto';
 
+@Roles(SchoolMemberRole.ADMIN, SchoolMemberRole.TEACHER)
 @ApiTags(API_TAGS.SCHOOL_MEMBER)
 @Controller({ version: '1' })
 export class CreateSchoolMemberController {
