@@ -1,33 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { GroupDTO } from './group.dto';
+import { CourseDTO } from './course.dto';
 import { SchoolDTO } from './school.dto';
 import { SchoolMemberDTO } from './schoolMember.dto';
 
-export class CourseDTO {
+export class GroupDTO {
   @ApiProperty({ example: 1 })
   id: number;
 
-  @ApiProperty({ example: 'Course name' })
+  @ApiProperty({ example: 'Group name' })
   name: string;
 
-  @ApiProperty({ example: 'Course description' })
-  description: string;
+  @ApiProperty({ type: () => CourseDTO })
+  course: () => CourseDTO;
+
+  @ApiProperty({ type: () => SchoolDTO })
+  school: SchoolDTO;
 
   @ApiProperty({ example: true })
   isActive: boolean;
 
-  //TODO add GroupDTO
-  @ApiProperty({ type: () => [GroupDTO] })
-  groups: GroupDTO[];
-
-  //TODO add SchoolMemberContractDTO
-
   @ApiProperty({ type: () => [SchoolMemberDTO] })
   schoolMembers: SchoolMemberDTO[];
-
-  @ApiProperty({ type: () => SchoolDTO })
-  school: SchoolDTO;
 
   @ApiProperty({ example: '2021-09-01T00:00:00.000Z' })
   createdAt: Date;

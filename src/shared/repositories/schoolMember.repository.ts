@@ -12,6 +12,21 @@ export class SchoolMemberRepository {
   ) {}
 
   async save(schoolMember: SchoolMember): Promise<SchoolMember> {
+    const queryRunner =
+      this.schoolMemberRepository.manager.connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const savedSchoolMember = await queryRunner.manager.save(schoolMember);
+      await queryRunner.commitTransaction();
+      return savedSchoolMember;
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+      throw err;
+    } finally {
+      await queryRunner.release();
+    }
+
     const savedSchoolMember =
       await this.schoolMemberRepository.save(schoolMember);
 

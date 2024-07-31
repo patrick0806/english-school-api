@@ -4,6 +4,7 @@ import { Exclude } from 'class-transformer';
 import { SchoolMemberRole } from '@shared/enums';
 
 import { CourseDTO } from './course.dto';
+import { GroupDTO } from './group.dto';
 import { SchoolDTO } from './school.dto';
 
 export class SchoolMemberDTO {
@@ -36,9 +37,11 @@ export class SchoolMemberDTO {
 
   @ApiProperty({ type: () => [CourseDTO] })
   courses: CourseDTO[];
+
+  @ApiProperty({ type: () => [GroupDTO] })
+  groups: GroupDTO[];
   // TODO - add SchoolMemberContractDTO
-  // TODO - add CourseDTO
-  // TODO - add GroupDTO
+
   @ApiProperty({ example: '2021-09-01T00:00:00.000Z' })
   createdAt: Date;
 
