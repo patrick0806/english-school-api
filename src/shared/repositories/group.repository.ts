@@ -19,6 +19,10 @@ export class GroupRepository {
     });
   }
 
+  async delete(id: number): Promise<void> {
+    await this.groupRepository.delete(id);
+  }
+
   async findById(id: number): Promise<Group | undefined> {
     return this.groupRepository.findOne({ where: { id } });
   }
