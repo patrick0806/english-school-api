@@ -6,6 +6,7 @@ import { SchoolMemberRole } from '@shared/enums';
 import { CourseDTO } from './course.dto';
 import { GroupDTO } from './group.dto';
 import { SchoolDTO } from './school.dto';
+import { SchoolMemberContractDTO } from './schoolMemberContract.dto';
 
 export class SchoolMemberDTO {
   @ApiProperty({ example: 1 })
@@ -40,7 +41,9 @@ export class SchoolMemberDTO {
 
   @ApiProperty({ type: () => [GroupDTO] })
   groups: GroupDTO[];
-  // TODO - add SchoolMemberContractDTO
+
+  @ApiProperty({ type: () => [SchoolMemberContractDTO] })
+  contracts: SchoolMemberContractDTO[];
 
   @ApiProperty({ example: '2021-09-01T00:00:00.000Z' })
   createdAt: Date;

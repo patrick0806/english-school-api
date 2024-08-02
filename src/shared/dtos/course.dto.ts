@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { GroupDTO } from './group.dto';
 import { SchoolDTO } from './school.dto';
 import { SchoolMemberDTO } from './schoolMember.dto';
+import { SchoolMemberContractDTO } from './schoolMemberContract.dto';
 
 export class CourseDTO {
   @ApiProperty({ example: 1 })
@@ -17,11 +18,11 @@ export class CourseDTO {
   @ApiProperty({ example: true })
   isActive: boolean;
 
-  //TODO add GroupDTO
   @ApiProperty({ type: () => [GroupDTO] })
   groups: GroupDTO[];
 
-  //TODO add SchoolMemberContractDTO
+  @ApiProperty({ type: () => [SchoolMemberContractDTO] })
+  contracts: SchoolMemberContractDTO[];
 
   @ApiProperty({ type: () => [SchoolMemberDTO] })
   schoolMembers: SchoolMemberDTO[];
