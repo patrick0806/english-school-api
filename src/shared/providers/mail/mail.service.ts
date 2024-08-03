@@ -34,6 +34,7 @@ export class MailService {
       subject: `${schoolMember.school.name} | Welcome!`,
       template: './welcome',
       context: {
+        definePasswordLink: 'http://localhost:3000/auth/define-password', //TODO - change this to the actual url
         name: schoolMember.name,
         email: schoolMember.email,
         password,

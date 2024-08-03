@@ -3,6 +3,7 @@ import { Exclude } from 'class-transformer';
 
 import { SchoolMemberRole } from '@shared/enums';
 
+import { AddressDTO } from './address.dto';
 import { CourseDTO } from './course.dto';
 import { GroupDTO } from './group.dto';
 import { SchoolDTO } from './school.dto';
@@ -33,6 +34,21 @@ export class SchoolMemberDTO {
   @ApiProperty({ example: SchoolMemberRole.TEACHER, enum: SchoolMemberRole })
   role: SchoolMemberRole;
 
+  @ApiProperty({ example: true })
+  isBrazilian: boolean;
+
+  @ApiProperty({ example: '12345678901' })
+  documentValue: string;
+
+  @ApiProperty({ example: 'ID' })
+  documentType: string;
+
+  @ApiProperty({ example: 'Passport' })
+  foreignCountryDocumentName: string;
+
+  @ApiProperty({ example: '987654321' })
+  foreignCountryDocumentValue: string;
+
   @ApiProperty({ type: () => SchoolDTO })
   school: SchoolDTO;
 
@@ -44,6 +60,9 @@ export class SchoolMemberDTO {
 
   @ApiProperty({ type: () => [SchoolMemberContractDTO] })
   contracts: SchoolMemberContractDTO[];
+
+  @ApiProperty({ type: () => AddressDTO })
+  address: AddressDTO;
 
   @ApiProperty({ example: '2021-09-01T00:00:00.000Z' })
   createdAt: Date;

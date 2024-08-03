@@ -28,7 +28,7 @@ export class CreateSchoolMemberService {
   ): Promise<CreateSchoolMemberResponseDTO> {
     const schoolId = schoolMemberData.school.id;
     const school = await this.schoolRepository.findById(schoolId);
-
+    console.log(schoolMemberData);
     if (!school) {
       throw new NotFoundException({
         error: this.i18n.translate('exceptions.error.NOT_FOUND_ENTITY', {

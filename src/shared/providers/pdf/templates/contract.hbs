@@ -1,0 +1,156 @@
+<html
+  dir='ltr'
+  xmlns='http://www.w3.org/1999/xhtml'
+  xmlns:o='urn:schemas-microsoft-com:office:office'
+  lang='en'
+>
+  <head>
+    <meta charset='UTF-8' />
+    <meta content='width=device-width, initial-scale=1' name='viewport' />
+    <meta name='x-apple-disable-message-reformatting' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta content='telephone=no' name='format-detection' />
+    <title>Contrato</title>
+  </head>
+  <body>
+    <img
+      src='https://ik.imagekit.io/fridakahloloja/logo_text_cD7oSx4gi.png?updatedAt=1722721928348'
+      alt='Logo'
+      style='display: block; margin-left: auto; margin-right: auto; width: 300px'
+    />
+
+    <h2 style='text-align: center'>
+      CONTRATO PARA ENSINO DE LÍNGUA ESTRANGEIRA.
+    </h2>
+
+    <p><strong>Identificação das partes contratantes:</strong></p>
+
+    <p>
+      <strong>Aluno:</strong>
+      {{student.name}},
+      {{student.nationality}}
+      {{#if student.documentType}}
+        {{student.documentType}}
+        Nº.
+        {{student.documentValue}}
+        {{#unless student.isBrazilian}}
+          {{#if student.nationality}}
+            {{student.nationality}}
+            No.
+            {{student.documentValue}},
+          {{/if}}
+        {{/unless}}
+      {{else}}
+        {{#if student.isBrazilian}}
+          CPF:
+          {{student.documentValue}}
+        {{/if}}
+      {{/if}}
+      Residente em
+      {{student.address.street}},
+      {{student.address.neighborhood}},
+      {{student.address.city}}
+      /
+      {{student.address.state}}
+      - E-mail:
+      {{student.email}}.
+    </p>
+
+    <p>
+      <strong>Escola:</strong>
+      B-Fluent Idioma CNPJ 43.845.409/0001-11, com sede na Rua Padre Gatone,
+      Edificio Arnoldo B. Scheffer # 20, sala #15, Centro 1, CEP 88350-350,
+      Brusque SC.
+    </p>
+
+    <p>
+      <strong>Cláusula 1:</strong>
+      O contrato tem como objetivo garantir que sejam ministradas aulas de
+      ensino da língua
+      {{contract.courseLanguage}}
+      para o aluno acima identificado.
+    </p>
+
+    <p>
+      <strong>Cláusula 2:</strong>
+      O aluno terá direito a
+      {{contract.amountOfClasses}}
+      aulas por semana, com uma carga horária diária de 50 minutos por aula,
+      totalizando 100 minutos (1:60 horas semanais). O curso terá a duração de
+      doze (12) meses, podendo variar a conclusão conforme a disponibilidade do
+      aluno.
+    </p>
+
+    <p>
+      <strong>Cláusula 3:</strong>
+      A escola se compromete a realizar as aulas sempre com a presença de um
+      professor e nunca com vídeos ou gravações.
+    </p>
+
+    <p>
+      <strong>Cláusula 4:</strong>
+      O aluno se compromete a participar do curso durante um período mínimo de
+      um ano ({{contract.amountOfMounths}}
+      meses) de aulas presenciais, sempre com acompanhamento do professor.
+    </p>
+
+    <p>
+      <strong>Cláusula 5:</strong>
+      O aluno se compromete a pagar um valor mensal de
+      {{contract.mouthValueText}}
+      ({{contract.amountValue}}), referente à mensalidade.
+    </p>
+
+    <p>
+      <strong>Cláusula 6:</strong>
+      O valor pago pelo aluno, referente às mensalidades, deve ser efetuado até
+      o dia dez de cada mês. Para esse pagamento, o aluno pode escolher as
+      modalidades de pagamento em dinheiro, pix, transferência bancária ou
+      cartão de débito/crédito.
+    </p>
+
+    <p>
+      <strong>Cláusula 7:</strong>
+      Se o aluno sabe que não vai conseguir efetuar o pagamento até a data do
+      dia dez, o aluno deve informar a escola com até dois dias de antecedência.
+      Caso seja respeitado esse período de antecedência, a escola se compromete
+      a mudar a data do pagamento da mensalidade para o dia quinze sem cobrar
+      juros ou multa sobre o valor em questão. Se o aluno não pagar a
+      mensalidade dentro das datas limites, a escola se reserva o direito de
+      cobrar juros/multa de 2% ao dia e no máximo de 10% ao mês sobre o valor da
+      mensalidade.
+    </p>
+
+    <p>
+      <strong>Cláusula 8:</strong>
+      O aluno pode mudar ou cancelar no máximo de duas aulas por mês, desde que
+      avise o professor com antecedência de pelo menos um dia. Caso o aluno
+      considere cancelar mais de duas aulas por mês, será cobrado um valor
+      adicional de R$ 15,00 por cada aula com data ou horários alterados.
+    </p>
+
+    <p>
+      <strong>Cláusula 9:</strong>
+      A escola se compromete a entregar um certificado validado e assinado pelo
+      professor e responsável pela escola em questão ao final do período
+      acordado na Cláusula 2.
+    </p>
+
+    <p>
+      <strong>Cláusula 10:</strong>
+      A escola se compromete a não cobrar multa de cancelamento se este for
+      feito no final de cada livro, no período que representa seis meses. Caso o
+      cancelamento seja solicitado pelo aluno em qualquer período diferente ao
+      explicado acima, o aluno terá que pagar uma multa de quebra de contrato de
+      20% do valor que ainda falta pagar de mensalidades até o final do curso.
+    </p>
+
+    <p>
+      Declaro que reconheço a validade das Cláusulas acima descritas e reconheço
+      meu compromisso para com a escola em questão.<br /><br />
+      Aluno(a):________________________________________
+    </p>
+    <p style='text-align: center'>Brusque,
+      {{formatDate contract.currentDate}}</p>
+  </body>
+</html>

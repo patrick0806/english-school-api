@@ -12,6 +12,7 @@ export class ValidationException {
   }>;
 
   constructor(validationErrors: ValidationError[]) {
+    console.log(JSON.stringify(validationErrors, null, 2));
     const fieldsErrors = validationErrors.flatMap((error) => {
       const notFollowedRules = Object.keys(error.constraints);
       return notFollowedRules.map((rule) => {

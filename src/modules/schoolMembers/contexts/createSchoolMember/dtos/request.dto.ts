@@ -1,11 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
+  IsBoolean,
   IsEmail,
   IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsString,
   ValidateNested,
 } from 'class-validator';
 
@@ -16,6 +18,43 @@ class MemberSchoolDTO {
   @IsNumber({}, { message: 'validation.INVALID_NUMBER' })
   @ApiProperty({ example: 1 })
   id: number;
+}
+
+class MemberSchoolAddressDTO {
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: 'Rua das flores' })
+  street: string;
+
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_NUMBER' })
+  @ApiProperty({ example: '68A' })
+  number: string;
+
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: 'Jardim Crepusculo' })
+  neighborhood: string;
+
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: 'São João da Boa Vista' })
+  city: string;
+
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: 'SP' })
+  state: string;
+
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: 'Brasil' })
+  country: string;
+
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: '123456' })
+  zipCode: string;
 }
 
 export class CreateSchoolMemberRequestDTO {
@@ -61,4 +100,35 @@ export class CreateSchoolMemberRequestDTO {
   @Type(() => MemberSchoolDTO)
   @ApiProperty({ example: { id: 1 } })
   school: MemberSchoolDTO;
+
+  @ValidateNested()
+  @Type(() => MemberSchoolAddressDTO)
+  @ApiProperty({ type: MemberSchoolAddressDTO })
+  address: MemberSchoolAddressDTO;
+
+  @IsBoolean()
+  @ApiProperty({ example: true })
+  isBrazilian: boolean;
+
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: '123456789' })
+  documentValue: string;
+
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: 'RG' })
+  documentType: string;
+
+  @IsOptional()
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: 'PERSONAL' })
+  foreignCountryDocumentName?: string;
+
+  @IsOptional()
+  @IsNotEmpty({ message: 'validation.NOT_EMPTY' })
+  @IsString({ message: 'validation.INVALID_STRING' })
+  @ApiProperty({ example: 'Brasil' })
+  foreignCountryDocumentValue?: string;
 }

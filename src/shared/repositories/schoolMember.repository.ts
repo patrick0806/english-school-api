@@ -49,7 +49,7 @@ export class SchoolMemberRepository {
   async findById(id: number): Promise<SchoolMember | undefined> {
     return this.schoolMemberRepository.findOne({
       where: { id },
-      relations: { school: true, courses: true },
+      relations: { school: true, courses: true, address: true },
     });
   }
 

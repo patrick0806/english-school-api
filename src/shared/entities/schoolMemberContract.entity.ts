@@ -19,14 +19,22 @@ export class SchoolMemberContract {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ name: 'monthly_value', type: 'int', nullable: false })
   monthlyValue: number;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ name: 'number_of_months', type: 'int', nullable: true })
   numberOfMonths: number;
 
-  @Column({ type: 'date', default: new Date(), nullable: false })
+  @Column({
+    name: 'start_date',
+    type: 'date',
+    default: new Date(),
+    nullable: false,
+  })
   startDate: Date;
+
+  @Column({ name: 'amount_classes_weekly', type: 'int', nullable: false })
+  amountClassesWeekly: number;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
   status: ContractStatus;

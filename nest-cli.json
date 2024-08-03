@@ -8,7 +8,11 @@
     "typeCheck": true,
     "assets": [
       { "include": "config/i18n/**/*", "watchAssets": true },
-      { "include": "shared/providers/mail/templates/**/*", "watchAssets": true }
+      {
+        "include": "shared/providers/mail/templates/**/*",
+        "watchAssets": true
+      },
+      { "include": "shared/providers/pdf/templates/**/*", "watchAssets": true }
     ]
   }
 }

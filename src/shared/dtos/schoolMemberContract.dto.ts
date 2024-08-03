@@ -18,6 +18,9 @@ export class SchoolMemberContractDTO {
   @ApiProperty({ example: '2022-05-01' })
   startDate: Date;
 
+  @ApiProperty({ example: 2 })
+  amount_classes_weekly: number;
+
   @ApiProperty({ example: ContractStatus.ACTIVE, enum: ContractStatus })
   status: ContractStatus;
 

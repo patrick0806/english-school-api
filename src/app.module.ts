@@ -18,6 +18,7 @@ import { CourseModule } from '@modules/course/course.module';
 import { GroupsModule } from '@modules/groups/groups.module';
 import { HealthModule } from '@modules/health/health.module';
 import { SchoolMembersModule } from '@modules/schoolMembers/schoolMembers.module';
+import { SchoolMembersContractsModule } from '@modules/schoolMembersContracts/schoolMembersContracts.module';
 import { SchoolsModule } from '@modules/schools/schools.module';
 
 @Module({
@@ -46,6 +47,7 @@ import { SchoolsModule } from '@modules/schools/schools.module';
     GroupsModule,
     SchoolsModule,
     SchoolMembersModule,
+    SchoolMembersContractsModule,
     RouterModule.register([
       {
         path: 'health',
@@ -66,6 +68,10 @@ import { SchoolsModule } from '@modules/schools/schools.module';
       {
         path: 'school-members',
         module: SchoolMembersModule,
+      },
+      {
+        path: 'school-members-contracts',
+        module: SchoolMembersContractsModule,
       },
       {
         path: 'schools',
