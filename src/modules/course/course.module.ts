@@ -8,10 +8,25 @@ import { CreateCourseController } from './contexts/createCourse/createCourse.con
 import { CreateCourseService } from './contexts/createCourse/createCourse.service';
 import { DeleteCourseController } from './contexts/deleteCourse/deleteCourse.controller';
 import { DeleteCourseService } from './contexts/deleteCourse/deleteCourse.service';
+import { FindCourseByIdController } from './contexts/findCourseById/findCourseById.controller';
+import { FindCourseByIdService } from './contexts/findCourseById/findCourseById.service';
+import { ListCoursesController } from './contexts/listCourses/listCourses.controller';
+import { ListCoursesService } from './contexts/listCourses/listCourses.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Course])],
-  controllers: [CreateCourseController, DeleteCourseController],
-  providers: [CreateCourseService, DeleteCourseService, CourseRepository],
+  controllers: [
+    CreateCourseController,
+    DeleteCourseController,
+    ListCoursesController,
+    FindCourseByIdController,
+  ],
+  providers: [
+    CreateCourseService,
+    DeleteCourseService,
+    ListCoursesService,
+    FindCourseByIdService,
+    CourseRepository,
+  ],
 })
 export class CourseModule {}

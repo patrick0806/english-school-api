@@ -54,7 +54,7 @@ export class CourseRepository {
     }
     const [content, totalElements] = await this.repository.findAndCount({
       where: conditions,
-      skip: (page - 1) * pageSize,
+      skip: Math.max(0, (page - 1) * pageSize),
       take: pageSize,
     });
     return {
