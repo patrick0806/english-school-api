@@ -5,6 +5,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 RUN npm run test
+RUN npm migration:run
 
 FROM node:20-alpine AS production
 WORKDIR /app
