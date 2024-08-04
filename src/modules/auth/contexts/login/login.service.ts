@@ -30,6 +30,7 @@ export class LoginService {
       email: schoolMember.email,
       schoolId: schoolMember.school.id,
       role: schoolMember.role,
+      name: schoolMember.name,
       sub: schoolMember.id,
     };
 
