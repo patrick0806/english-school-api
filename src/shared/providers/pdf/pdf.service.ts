@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import fs from 'node:fs';
+import path from 'path';
 import PDFDocument from 'pdfkit';
 
 import { IContractTemplate } from './interfaces/contractTemplate.interface';
-import path from 'path';
 
 @Injectable()
 export class PdfService {
