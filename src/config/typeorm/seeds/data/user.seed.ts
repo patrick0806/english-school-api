@@ -66,8 +66,8 @@ export const userData: User[] = [
   {
     id: 5,
     code: 'STR5_TO_UPDATE',
-    name: 'Jane Doe',
-    email: 'jane@bfluent.com',
+    name: 'Dany Doe',
+    email: 'dany@bfluent.com',
     password: HashUtils.generateHash('123456'),
     phoneNumber: '5519993912304',
     role: UserRole.STUDENT,
