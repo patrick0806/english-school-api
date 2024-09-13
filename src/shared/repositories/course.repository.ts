@@ -14,4 +14,8 @@ export class CourseRepository {
   async save(course: Course): Promise<Course> {
     return this.courseRepository.save(course);
   }
+
+  async findById(id: number): Promise<Course> {
+    return this.courseRepository.findOneBy({ id });
+  }
 }
