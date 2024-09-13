@@ -6,10 +6,21 @@ import { CreateCourseController } from './contexts/createCourse/createCourse.con
 import { CreateCourseService } from './contexts/createCourse/createCourse.service';
 import { UpdateCourseController } from './contexts/updateCouse/updateCourse.controller';
 import { UpdateCourseService } from './contexts/updateCouse/updateCourse.service';
+import { FindCourseByIdController } from './contexts/findCourseById/findCourseById.controller';
+import { FindCourseByIdService } from './contexts/findCourseById/findCourseById.service';
 
 @Module({
   imports: [],
-  controllers: [CreateCourseController, UpdateCourseController],
-  providers: [CreateCourseService, UpdateCourseService, CourseRepository],
+  controllers: [
+    FindCourseByIdController,
+    CreateCourseController,
+    UpdateCourseController,
+  ],
+  providers: [
+    FindCourseByIdService,
+    CreateCourseService,
+    UpdateCourseService,
+    CourseRepository,
+  ],
 })
 export class CourseModule {}
