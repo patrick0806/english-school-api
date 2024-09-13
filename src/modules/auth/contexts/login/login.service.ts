@@ -25,8 +25,8 @@ export class LoginService {
         {
           id: user.id,
           name: user.name,
-          role: user.role,
           email: user.email,
+          role: user.role,
         },
         {
           expiresIn: env().application.jwt.expiration,

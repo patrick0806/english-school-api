@@ -87,7 +87,7 @@ describe('LoginService', () => {
       await service.execute(mockRequestDTO);
 
       expect(jwtService.sign).toHaveBeenCalledWith(
-        { id: mockTokenPayload.id, role: mockTokenPayload.role },
+        { id: mockTokenPayload.id },
         expect.objectContaining({ expiresIn: expect.any(String) }),
       );
     });
@@ -99,7 +99,6 @@ describe('LoginService', () => {
         accessToken: JSON.stringify(mockTokenPayload),
         refreshToken: JSON.stringify({
           id: mockTokenPayload.id,
-          role: mockTokenPayload.role,
         }),
       });
     });
