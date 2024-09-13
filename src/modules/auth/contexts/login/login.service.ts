@@ -15,18 +15,26 @@ export class LoginService {
     private jwtService: JwtService,
   ) {}
   async execute(loginData: LoginRequestDTO): Promise<LoginResponseDTO> {
-    const tokenPayload = await this.localStrategy.validate(
+    const user = await this.localStrategy.validate(
       loginData.email,
       loginData.password,
     );
 
     return {
-      accessToken: this.jwtService.sign(tokenPayload, {
-        expiresIn: env().application.jwt.expiration,
-        secret: env().application.jwt.secrect,
-      }),
+      accessToken: this.jwtService.sign(
+        {
+          id: user.id,
+          name: user.name,
+          role: user.role,
+          email: user.email,
+        },
+        {
+          expiresIn: env().application.jwt.expiration,
+          secret: env().application.jwt.secrect,
+        },
+      ),
       refreshToken: this.jwtService.sign(
-        { id: tokenPayload.id, role: tokenPayload.role },
+        { id: user.id },
         {
           expiresIn: env().application.jwt.refreshExpiration,
           secret: env().application.jwt.refreshSecret,

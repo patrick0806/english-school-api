@@ -10,4 +10,8 @@ export class CourseRepository {
   constructor(private datasource: DataSource) {
     this.courseRepository = datasource.getRepository(Course);
   }
+
+  async save(course: Course): Promise<Course> {
+    return this.courseRepository.save(course);
+  }
 }

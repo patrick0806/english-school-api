@@ -9,6 +9,7 @@ import { databaseOptions } from '@config/typeorm';
 import { JWTAuthGuard, RolesGuard } from '@shared/guards';
 
 import { AuthModule } from '@modules/auth/auth.module';
+import { CourseModule } from '@modules/course/course.module';
 import { HealthModule } from '@modules/health/health.module';
 
 @Module({
@@ -20,6 +21,7 @@ import { HealthModule } from '@modules/health/health.module';
     TypeOrmModule.forRoot({ ...databaseOptions }),
     HealthModule,
     AuthModule,
+    CourseModule,
     RouterModule.register([
       {
         path: 'health',
@@ -28,6 +30,10 @@ import { HealthModule } from '@modules/health/health.module';
       {
         path: 'auth',
         module: AuthModule,
+      },
+      {
+        path: 'courses',
+        module: CourseModule,
       },
     ]),
   ],
