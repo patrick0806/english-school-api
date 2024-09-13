@@ -23,6 +23,7 @@ export class InitialDataSeed {
       // Populate tables in sequence
       await this.populateTable(Course, this.courseRepository, coursesData);
       await this.populateTable(User, this.userRepository, userData);
+      await this.queryRunner.commitTransaction();
     } catch (error) {
       await this.queryRunner.rollbackTransaction();
       this.logger.error(
