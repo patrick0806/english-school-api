@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { DocumentType, UserRole, UserStatus } from '@shared/enums/user';
 
@@ -19,7 +25,12 @@ export class User {
   @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
+  @Column({
+    name: 'phone_number',
+    type: 'varchar',
+    length: 20,
+    nullable: false,
+  })
   phoneNumber: string;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
@@ -28,18 +39,36 @@ export class User {
   @Column({ type: 'varchar', length: 20, nullable: true })
   status: UserStatus;
 
-  @Column({ type: 'boolean', nullable: false })
+  @Column({ name: 'is_brasilian', type: 'boolean', nullable: false })
   isBrasilian: boolean;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({
+    name: 'document_type',
+    type: 'varchar',
+    length: 20,
+    nullable: true,
+  })
   documentType: DocumentType;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({
+    name: 'document_number',
+    type: 'varchar',
+    length: 20,
+    nullable: true,
+  })
   documentNumber: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   createdAt: Date;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({
+    name: 'updated_at',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   updatedAt: Date;
 }

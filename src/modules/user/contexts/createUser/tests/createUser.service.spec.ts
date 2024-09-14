@@ -9,6 +9,12 @@ import { UserRepository } from '@shared/repositories';
 import { CreateUserService } from '../createuser.service';
 import { CreateUserRequestDTO } from '../dtos/request.dto';
 
+vi.mock('@shared/utils', () => ({
+  HashUtils: {
+    generateHash: vi.fn(),
+  },
+}));
+
 describe('CreateUserService', () => {
   let createUserService: CreateUserService;
   let userRepository: UserRepository;

@@ -40,7 +40,7 @@ export class CreateUsersTable1726166974726 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'phoneNumber',
+            name: 'phone_number',
             type: 'varchar',
             length: '20',
             isNullable: false,
@@ -58,29 +58,29 @@ export class CreateUsersTable1726166974726 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'isBrasilian',
+            name: 'is_brasilian',
             type: 'boolean',
             isNullable: false,
           },
           {
-            name: 'documentType',
+            name: 'document_type',
             type: 'varchar',
             length: '20',
             isNullable: true,
           },
           {
-            name: 'documentNumber',
+            name: 'document_number',
             type: 'varchar',
             length: '20',
             isNullable: true,
           },
           {
-            name: 'createdAt',
+            name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',
           },
           {
-            name: 'updatedAt',
+            name: 'updated_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',
           },
