@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 
 import { BrasilAPIConnector } from '@shared/connector';
 
-import { FindByZipCodeController } from './contexts/findByZipCodeController/findByZipCodeController.controller';
+import { FindByZipCodeController } from './contexts/findByZipCodeController/findByZipCode.controller';
 import { FindByZipCodeService } from './contexts/findByZipCodeController/findByZipCode.service';
 
 @Module({
