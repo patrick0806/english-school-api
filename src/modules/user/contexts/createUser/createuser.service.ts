@@ -4,6 +4,7 @@ import { plainToClass } from 'class-transformer';
 import { User } from '@shared/entities';
 import { UserRole } from '@shared/enums/user';
 import { UserRepository } from '@shared/repositories';
+import { HashUtils } from '@shared/utils';
 
 import { CreateUserRequestDTO } from './dtos/request.dto';
 import { CreateUserResponsetDTO } from './dtos/response.dto';
@@ -26,6 +27,7 @@ export class CreateUserService {
     const savedUser = await this.userRepository.save(
       plainToClass(User, {
         ...userData,
+        password: HashUtils.generateHash(userData.password),
         code: this.generateCode(
           userData.name,
           userData.role,
