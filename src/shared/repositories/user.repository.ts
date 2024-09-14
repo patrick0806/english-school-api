@@ -11,7 +11,19 @@ export class UserRepository {
     this.userRepository = datasource.getRepository(User);
   }
 
+  async save(user: User): Promise<User> {
+    return this.userRepository.save(user);
+  }
+
   async findByEmail(email: string): Promise<User> {
     return this.userRepository.findOneBy({ email });
+  }
+
+  async getLastCreatedUser(): Promise<User> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .orderBy('user.id', 'DESC')
+      .limit(1)
+      .getOne();
   }
 }

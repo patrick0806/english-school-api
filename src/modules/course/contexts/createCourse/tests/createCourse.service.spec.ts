@@ -18,6 +18,7 @@ describe('CreateCourseService', () => {
           provide: CourseRepository,
           useValue: {
             save: vi.fn(),
+            findByName: vi.fn(),
           },
         },
       ],
@@ -50,5 +51,26 @@ describe('CreateCourseService', () => {
     expect(courseRepository.save).toHaveBeenCalledTimes(1);
     expect(courseRepository.save).toHaveBeenCalledWith(courseData);
     expect(result).toEqual(savedCourse);
+  });
+
+  it('should throw an error if course already exists', async () => {
+    vi.spyOn(courseRepository, 'save').mockRejectedValue(new Error());
+    vi.spyOn(courseRepository, 'findByName').mockResolvedValue({
+      id: 1,
+      name: 'Course 1',
+      description: 'Description 1',
+      status: CourseStatus.ACTIVE,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+    const courseData = {
+      name: 'Course 1',
+      description: 'Description 1',
+      status: CourseStatus.ACTIVE,
+    };
+
+    await expect(createCourseService.execute(courseData)).rejects.toThrow(
+      'Course already exists',
+    );
   });
 });

@@ -41,4 +41,8 @@ export class CourseRepository {
       pageSize: searchParams.pageSize,
     };
   }
+
+  findByName(name: string): Promise<Course> {
+    return this.courseRepository.findOneBy({ name });
+  }
 }
