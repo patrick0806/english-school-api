@@ -11,7 +11,7 @@ import { Roles } from '@shared/decorators';
 import { UserRole } from '@shared/enums/user';
 
 import { FindByZipCodeResponseDTO } from './dtos/response.dto';
-import { FindByZipCodeService } from './findByZipCodeControllere.service';
+import { FindByZipCodeService } from './findByZipCode.service';
 
 @Roles(UserRole.ADMIN)
 @ApiTags(API_TAGS.LOCALITY)

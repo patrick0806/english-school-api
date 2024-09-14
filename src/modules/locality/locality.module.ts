@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 import { BrasilAPIConnector } from '@shared/connector';
 
 import { FindByZipCodeController } from './contexts/findByZipCodeController/findByZipCodeController.controller';
-import { FindByZipCodeService } from './contexts/findByZipCodeController/findByZipCodeControllere.service';
+import { FindByZipCodeService } from './contexts/findByZipCodeController/findByZipCode.service';
 
 @Module({
   imports: [HttpModule],
