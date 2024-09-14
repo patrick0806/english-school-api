@@ -19,6 +19,10 @@ export class UserRepository {
     return this.userRepository.findOneBy({ email });
   }
 
+  async findById(id: number): Promise<User> {
+    return this.userRepository.findOneBy({ id });
+  }
+
   async getLastCreatedUser(): Promise<User> {
     return this.userRepository
       .createQueryBuilder('user')
