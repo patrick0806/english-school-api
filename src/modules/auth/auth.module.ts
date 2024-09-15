@@ -5,8 +5,12 @@ import env from '@config/env';
 
 import { UserRepository } from '@shared/repositories';
 
+import { ForgotPasswordController } from './contexts/forgotPassword/forgotPassword.controller';
+import { ForgotPasswordService } from './contexts/forgotPassword/forgotPassword.service';
 import { LoginController } from './contexts/login/login.controller';
 import { LoginService } from './contexts/login/login.service';
+import { ResetPasswordController } from './contexts/resetPassword/resetPassword.controller';
+import { ResetPasswordService } from './contexts/resetPassword/resetPassword.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 
@@ -17,7 +21,18 @@ import { LocalStrategy } from './strategies/local.strategy';
       signOptions: { expiresIn: env().application.jwt.expiration },
     }),
   ],
-  controllers: [LoginController],
-  providers: [LoginService, LocalStrategy, JwtStrategy, UserRepository],
+  controllers: [
+    LoginController,
+    ResetPasswordController,
+    ForgotPasswordController,
+  ],
+  providers: [
+    LoginService,
+    ResetPasswordService,
+    ForgotPasswordService,
+    LocalStrategy,
+    JwtStrategy,
+    UserRepository,
+  ],
 })
 export class AuthModule {}
