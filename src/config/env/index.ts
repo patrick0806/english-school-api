@@ -8,6 +8,9 @@ export default () => ({
       expiration: process.env.JWT_EXPIRATION || '1d',
       refreshSecret: process.env.JWT_REFRESH_SECRET || 'secret',
       refreshExpiration: process.env.JWT_REFRESH_EXPIRATION || '7d',
+      resetPasswordSecret: process.env.JWT_RESET_PASSWORD_SECRET || 'secret',
+      resetPasswordExpiration:
+        process.env.JWT_RESET_PASSWORD_EXPIRATION || '1h',
     },
   },
   database: {
