@@ -3,6 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 
 import env from '@config/env';
 
+import { MailModule } from '@shared/providers';
 import { UserRepository } from '@shared/repositories';
 
 import { ForgotPasswordController } from './contexts/forgotPassword/forgotPassword.controller';
@@ -20,6 +21,7 @@ import { LocalStrategy } from './strategies/local.strategy';
       secret: env().application.jwt.secrect,
       signOptions: { expiresIn: env().application.jwt.expiration },
     }),
+    MailModule,
   ],
   controllers: [
     LoginController,

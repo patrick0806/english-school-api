@@ -20,4 +20,12 @@ export default () => ({
     user: process.env.DATABASE_USER || 'postgres',
     password: process.env.DATABASE_PASSWORD || '1234',
   },
+  mail: {
+    host: process.env.MAIL_HOST || 'smtp.mailersend.net',
+    port: Number(process.env.MAIL_PORT) || 587,
+    security: Boolean(process.env.MAIL_SECURITY) || false,
+    user: process.env.MAIL_USER || 'MS_kIfsn8@patricknicezi.tech',
+    password: process.env.MAIL_PASSWORD || 'D3IjrLkZ3Qkct1OZ',
+    from: process.env.MAIL_FROM || '',
+  },
 });

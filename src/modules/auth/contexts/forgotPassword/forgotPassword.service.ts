@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import env from '@config/env';
 
+import { MailService } from '@shared/providers/mail/mail.service';
 import { UserRepository } from '@shared/repositories';
 
 @Injectable()
@@ -10,6 +11,7 @@ export class ForgotPasswordService {
   constructor(
     private userRepository: UserRepository,
     private jwtService: JwtService,
+    private mailService: MailService,
   ) {}
 
   async execute(email: string): Promise<void> {
@@ -29,6 +31,10 @@ export class ForgotPasswordService {
       },
     );
 
-    console.log('resetToken->', restToken);
+    this.mailService
+      .sendForgotPasswordConfirmation(user, restToken)
+      .catch((error) => {
+        console.error('Fail to send fortgot password email', error);
+      });
   }
 }

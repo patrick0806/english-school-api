@@ -3,6 +3,7 @@ import { plainToClass } from 'class-transformer';
 
 import { User } from '@shared/entities';
 import { UserRole } from '@shared/enums/user';
+import { MailService } from '@shared/providers/mail/mail.service';
 import { UserRepository } from '@shared/repositories';
 import { HashUtils } from '@shared/utils';
 
@@ -11,7 +12,10 @@ import { CreateUserResponsetDTO } from './dtos/response.dto';
 
 @Injectable()
 export class CreateUserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private mailService: MailService,
+  ) {}
 
   async execute(
     userData: CreateUserRequestDTO,
@@ -35,6 +39,12 @@ export class CreateUserService {
         ),
       }),
     );
+
+    this.mailService
+      .sendWelcomeEmail(savedUser, userData.password)
+      .catch((error) => {
+        console.error('Fail on send Welcome email', error);
+      });
     return plainToClass(CreateUserResponsetDTO, savedUser);
   }
 

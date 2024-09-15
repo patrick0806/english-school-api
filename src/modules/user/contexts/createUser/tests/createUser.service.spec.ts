@@ -4,6 +4,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 import { User } from '@shared/entities';
 import { UserRole } from '@shared/enums/user';
+import { MailService } from '@shared/providers/mail/mail.service';
 import { UserRepository } from '@shared/repositories';
 
 import { CreateUserService } from '../createuser.service';
@@ -18,6 +19,7 @@ vi.mock('@shared/utils', () => ({
 describe('CreateUserService', () => {
   let createUserService: CreateUserService;
   let userRepository: UserRepository;
+  let mailService: MailService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -31,16 +33,24 @@ describe('CreateUserService', () => {
             save: vi.fn(),
           },
         },
+        {
+          provide: MailService,
+          useValue: {
+            sendWelcomeEmail: vi.fn(),
+          },
+        },
       ],
     }).compile();
 
     createUserService = module.get<CreateUserService>(CreateUserService);
     userRepository = module.get<UserRepository>(UserRepository);
+    mailService = module.get<MailService>(MailService);
   });
 
   it('should be defined', () => {
     expect(createUserService).toBeDefined();
     expect(userRepository).toBeDefined();
+    expect(mailService).toBeDefined();
   });
 
   describe('execute method', () => {
@@ -60,6 +70,7 @@ describe('CreateUserService', () => {
         lastUser,
       );
       vi.spyOn(userRepository, 'save').mockResolvedValue(savedUser);
+      vi.spyOn(mailService, 'sendWelcomeEmail').mockResolvedValue(undefined);
 
       const result = await createUserService.execute(userData);
 
@@ -70,6 +81,11 @@ describe('CreateUserService', () => {
       expect(result).toBeInstanceOf(Object);
       expect(result).toHaveProperty('id', 2);
       expect(result).toHaveProperty('code', '001-JD-A');
+      expect(mailService.sendWelcomeEmail).toHaveBeenCalledTimes(1);
+      expect(mailService.sendWelcomeEmail).toHaveBeenCalledWith(
+        savedUser,
+        userData.password,
+      );
     });
 
     it('should throw ConflictException when email already exists', async () => {
@@ -104,6 +120,8 @@ describe('CreateUserService', () => {
       vi.spyOn(userRepository, 'save').mockResolvedValue({
         code: expectedCode,
       } as User);
+
+      vi.spyOn(mailService, 'sendWelcomeEmail').mockResolvedValue(null);
 
       const result = await createUserService.execute(userData);
 
