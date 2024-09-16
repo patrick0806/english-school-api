@@ -10,6 +10,8 @@ import { ForgotPasswordController } from './contexts/forgotPassword/forgotPasswo
 import { ForgotPasswordService } from './contexts/forgotPassword/forgotPassword.service';
 import { LoginController } from './contexts/login/login.controller';
 import { LoginService } from './contexts/login/login.service';
+import { RefreshTokenController } from './contexts/refreshToken/refreshToken.controller';
+import { RefreshTokenService } from './contexts/refreshToken/refreshToken.service';
 import { ResetPasswordController } from './contexts/resetPassword/resetPassword.controller';
 import { ResetPasswordService } from './contexts/resetPassword/resetPassword.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
@@ -25,11 +27,13 @@ import { LocalStrategy } from './strategies/local.strategy';
   ],
   controllers: [
     LoginController,
+    RefreshTokenController,
     ResetPasswordController,
     ForgotPasswordController,
   ],
   providers: [
     LoginService,
+    RefreshTokenService,
     ResetPasswordService,
     ForgotPasswordService,
     LocalStrategy,
